@@ -4,6 +4,8 @@
  */
 package com.hfp;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Lakshmi Parasuram <lakshmibhavani1712@gmail.com>
@@ -31,6 +33,9 @@ public class PatientHome extends javax.swing.JFrame {
         userName = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         logoutButton = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        prescriptionsTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,17 +48,45 @@ public class PatientHome extends javax.swing.JFrame {
             }
         });
 
+        prescriptionsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "Doctor"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(prescriptionsTable);
+
+        jTabbedPane1.addTab("Prescriptions", jScrollPane2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(userName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
-                .addComponent(logoutButton)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(userName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
+                        .addComponent(logoutButton)))
                 .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
@@ -64,7 +97,9 @@ public class PatientHome extends javax.swing.JFrame {
                     .addComponent(userName)
                     .addComponent(jLabel2)
                     .addComponent(logoutButton))
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         pack();
@@ -117,11 +152,23 @@ public class PatientHome extends javax.swing.JFrame {
     
     public void startUI() {
         userName.setText(this.patient.username);
+//        prescriptionsTable.setValueAt("hello", 0, 0);
+        Data data = new Data();
+        ArrayList<Prescription> prescriptions = data.getPrescriptions();
+        for (int i = 0; i < prescriptions.size(); i++) {
+            Prescription prescription = prescriptions.get(i);
+            prescriptionsTable.setValueAt(prescription.getID(), i, 0);
+            prescriptionsTable.setValueAt(prescription.getDoctor().getName(), i, 1);
+            
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton logoutButton;
+    private javax.swing.JTable prescriptionsTable;
     private javax.swing.JLabel userName;
     // End of variables declaration//GEN-END:variables
 }
