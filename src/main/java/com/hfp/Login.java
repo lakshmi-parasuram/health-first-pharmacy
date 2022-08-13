@@ -8,7 +8,7 @@ import java.awt.Color;
 
 /**
  *
- * @author Lakshmi Bhavani Parasuram
+ * @author Lakshmi Parasuram <lakshmibhavani1712@gmail.com>
  */
 public class Login extends javax.swing.JFrame {
 
@@ -128,19 +128,13 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordActionPerformed
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-        // TODO add your handling code here:
-
+        String username = user_name.getText();
         String pass = new String(password.getPassword());
-
-        if ((pass.equals("1234")) && (user_name.getText().equals("patient1")))
+        User user = new User();
+        User foundUser = user.login(username, pass);
+        if (foundUser != null)
         {
-            msg.setText("Patient 1 - Successful Login");
-            msg.setForeground(new Color(111,150,118));
-        } else if ((pass.equals("1234")) && (user_name.getText().equals("patient2"))) {
-            msg.setText("Patient 2 - Successful Login");
-            msg.setForeground(new Color(111,150,118));
-        } else if ((pass.equals("1234")) && (user_name.getText().equals("patient3"))) {
-            msg.setText("Patient 3 - Successful Login");
+            msg.setText("Successful Login");
             msg.setForeground(new Color(111,150,118));
         }
         else
