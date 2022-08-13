@@ -134,13 +134,20 @@ public class Login extends javax.swing.JFrame {
         User foundUser = user.login(username, pass);
         if (foundUser != null)
         {
+            if (foundUser instanceof Patient) {
+                PatientHome patientHome = new PatientHome();
+                patientHome.setPatient((Patient)foundUser);
+                patientHome.startUI();
+                patientHome.setVisible(true);
+                dispose();
+            }
             msg.setText("Successful Login");
             msg.setForeground(new Color(111,150,118));
         }
         else
         {
             msg.setForeground(Color.red);
-            msg.setText("You username or passsword is incorrect");
+            msg.setText("Incorrect username or passsword");
         }
 
     }//GEN-LAST:event_loginActionPerformed

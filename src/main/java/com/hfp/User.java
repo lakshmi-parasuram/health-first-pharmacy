@@ -11,8 +11,8 @@ import java.util.ArrayList;
  * @author Lakshmi Parasuram <lakshmibhavani1712@gmail.com>
  */
 public class User {
-    private String username;
-    private String password;
+    protected String username;
+    protected String password;
     public User(){}
     public User(String username, String password) {
         this.username = username;
