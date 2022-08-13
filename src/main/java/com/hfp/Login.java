@@ -16,8 +16,6 @@ public class Login extends javax.swing.JFrame {
      * Creates new form HealthFirstPharmacy
      */
     public Login() {
-        
-        System.out.println("Application");
         initComponents();
     }
 
