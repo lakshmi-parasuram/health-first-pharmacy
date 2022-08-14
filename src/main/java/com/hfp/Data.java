@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.hfp;
 
 import java.util.ArrayList;
@@ -17,6 +13,16 @@ public class Data {
         ArrayList<Patient> patients = this.getPatients();
         for (Patient patient : patients) {
             users.add(patient);
+        }
+        
+        ArrayList<Pharmacist> pharmacists = this.getPharmacists();
+        for (Pharmacist pharmacist: pharmacists){
+            users.add(pharmacist);
+        }
+        
+        ArrayList<Manager> managers = this.getManagers();
+        for (Manager manager: managers){
+            users.add(manager);
         }
         
         return users;
@@ -119,4 +125,41 @@ public class Data {
         doctors.add(doctor2);
         return doctors;
     }
+    
+    public ArrayList<Pharmacist> getPharmacists() {
+        ArrayList<Pharmacist> pharmacists = new ArrayList<>();
+        
+        Pharmacist phr1 = new Pharmacist("pharmacist1", "1234");
+        pharmacists.add(phr1);
+        Pharmacist phr2 = new Pharmacist("pharmacist2", "1234");
+        pharmacists.add(phr2);
+        return pharmacists;
+    }
+    
+    
+    public ArrayList<Manager> getManagers() {
+        ArrayList<Manager> managers = new ArrayList<>();
+        
+        Manager manager = new Manager("manager1", "1234");
+        managers.add(manager);
+        
+        return managers;
+    }
+    
+    
+    public Inventory getInventory() {
+        ArrayList<Medicine> medicines = this.getMedicines();
+        Inventory inventory = new Inventory();
+        ArrayList<MedicineWithQuantity> medicinesWithQuantity = new ArrayList<>();
+        for(int i =0;i< medicines.size(); i++) {
+            Medicine med = medicines.get(i);
+            MedicineWithQuantity medWithQ = new MedicineWithQuantity();
+            medWithQ.setMedicine(med);
+            medWithQ.setQuantity(i+1);
+            medicinesWithQuantity.add(medWithQ);
+        }
+        inventory.setMedicinesWithQuantity(medicinesWithQuantity);
+        return inventory;
+    }
+
 }

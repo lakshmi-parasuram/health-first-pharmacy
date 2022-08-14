@@ -1,9 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.hfp;
 
+import com.hfp.frames.ManagerHome;
+import com.hfp.frames.PatientHome;
+import com.hfp.frames.PharmacistHome;
 import java.awt.Color;
 
 /**
@@ -139,6 +138,20 @@ public class Login extends javax.swing.JFrame {
                 patientHome.setPatient((Patient)foundUser);
                 patientHome.startUI();
                 patientHome.setVisible(true);
+                dispose();
+            } else if (foundUser instanceof Pharmacist) {
+                PharmacistHome pharmacistHome = new PharmacistHome();
+                pharmacistHome.setPharmacist((Pharmacist)foundUser);
+                pharmacistHome.startUI();
+                
+                pharmacistHome.setVisible(true);
+                dispose();
+            } else if (foundUser instanceof Manager) {
+                ManagerHome managerHome = new ManagerHome();
+                
+                managerHome.setManager((Manager)foundUser);
+                managerHome.startUI();
+                managerHome.setVisible(true);
                 dispose();
             }
             msg.setText("Successful Login");
