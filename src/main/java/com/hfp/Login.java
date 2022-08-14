@@ -1,5 +1,6 @@
 package com.hfp;
 
+import com.hfp.frames.AdminHome;
 import com.hfp.frames.ManagerHome;
 import com.hfp.frames.PatientHome;
 import com.hfp.frames.PharmacistHome;
@@ -153,7 +154,15 @@ public class Login extends javax.swing.JFrame {
                 managerHome.startUI();
                 managerHome.setVisible(true);
                 dispose();
+            } else if (foundUser instanceof Admin) {
+                AdminHome adminHome = new AdminHome();
+                
+                adminHome.setAdmin((Admin)foundUser);
+                adminHome.startUI();
+                adminHome.setVisible(true);
+                dispose();
             }
+            
             msg.setText("Successful Login");
             msg.setForeground(new Color(111,150,118));
         }

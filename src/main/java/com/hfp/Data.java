@@ -25,6 +25,11 @@ public class Data {
             users.add(manager);
         }
         
+        ArrayList<Admin> admins = this.getAdmins();
+        for (Admin admin: admins){
+            users.add(admin);
+        }
+        
         return users;
     }
     
@@ -144,6 +149,15 @@ public class Data {
         managers.add(manager);
         
         return managers;
+    }
+    
+    public ArrayList<Admin> getAdmins() {
+        ArrayList<Admin> admins = new ArrayList<>();
+        
+        Admin admin = new Admin("admin1", "1234");
+        admins.add(admin);
+        
+        return admins;
     }
     
     
