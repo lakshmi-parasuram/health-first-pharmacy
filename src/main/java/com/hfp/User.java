@@ -13,6 +13,19 @@ import java.util.ArrayList;
 public class User {
     protected String username;
     protected String password;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    
     public User(){}
     public User(String username, String password) {
         this.username = username;

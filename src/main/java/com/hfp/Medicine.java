@@ -9,6 +9,15 @@ package com.hfp;
  * @author Lakshmi Parasuram <lakshmibhavani1712@gmail.com>
  */
 public class Medicine {
+    private String ID;
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
     private String name;
     
     private double price;

@@ -12,6 +12,17 @@ import java.util.ArrayList;
  */
 public class Prescription {
     private String ID;
+    
+    private double totalPrice;
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+    
 
     public String getID() {
         return ID;

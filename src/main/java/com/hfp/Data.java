@@ -35,22 +35,49 @@ public class Data {
     public ArrayList<Prescription> getPrescriptions() {
         ArrayList<Prescription> prescriptions = new ArrayList<>();
         
+        // Prescription 1
         Prescription prescription = new Prescription();
-        prescription.setID("123");
+        prescription.setID("pr123");
         
         ArrayList<Doctor> doctors = this.getDoctors();
         prescription.setDoctor(doctors.get(0));
         
         ArrayList<Patient> patients = this.getPatients();
         prescription.setPatient(patients.get(0));
+        double totalPrice = 0;
+        ArrayList<Medicine> allMedicines = this.getMedicines();
+        ArrayList<Medicine> presMeds = new ArrayList<>();
+        for (int i=0; i< allMedicines.size() - 1; i++) {
+            Medicine med = allMedicines.get(i);
+            totalPrice += med.getPrice();
+            presMeds.add(med);
+        }
+        prescription.setMedicines(presMeds);
         
-        ArrayList<Medicine> medicines = this.getMedicines();
-        prescription.setMedicines(medicines);
-        
+        prescription.setTotalPrice(totalPrice);
         
         prescriptions.add(prescription);
+        // second prescription
+        Prescription presc2 = new Prescription();
+        presc2.setID("pr135");
         
+        presc2.setDoctor(doctors.get(1));
         
+        presc2.setPatient(patients.get(1));
+        
+        ArrayList<Medicine> presMeds2 = new ArrayList<>();
+        totalPrice = 0;
+        
+        for (int i=1; i< allMedicines.size(); i++) {
+            Medicine med = allMedicines.get(i);
+            totalPrice += med.getPrice();
+            presMeds2.add(med);
+        }
+        presc2.setMedicines(presMeds2);
+        
+        presc2.setTotalPrice(totalPrice);
+        
+        prescriptions.add(presc2);
         return prescriptions;
     }
     
@@ -58,10 +85,23 @@ public class Data {
         ArrayList<Medicine> medicines = new ArrayList<>();
         
         Medicine medicine = new Medicine();
+        medicine.setID("m12");
         medicine.setName("Paracetamol");
         medicine.setPrice(1.2);
-        
         medicines.add(medicine);
+        
+        Medicine medicine2 = new Medicine();
+        medicine2.setID("m13");
+        medicine2.setName("Aspirin");
+        medicine2.setPrice(0.9);
+        medicines.add(medicine2);
+        
+        Medicine medicine3 = new Medicine();
+        medicine3.setID("m14");
+        medicine3.setName("Benadryl");
+        medicine3.setPrice(1.1);
+        
+        medicines.add(medicine3);
         
         return medicines;
     }
@@ -72,7 +112,11 @@ public class Data {
         Doctor doctor = new Doctor();
         doctor.setName("Doctor1");
         
+        Doctor doctor2 = new Doctor();
+        doctor2.setName("Doctor2");
+        
         doctors.add(doctor);
+        doctors.add(doctor2);
         return doctors;
     }
 }

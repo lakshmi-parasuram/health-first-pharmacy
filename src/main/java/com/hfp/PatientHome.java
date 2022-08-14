@@ -5,6 +5,8 @@
 package com.hfp;
 
 import java.util.ArrayList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -36,6 +38,8 @@ public class PatientHome extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         prescriptionsTable = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        medicinesTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,17 +54,17 @@ public class PatientHome extends javax.swing.JFrame {
 
         prescriptionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID", "Doctor"
+                "ID", "Doctor", "Price Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -70,6 +74,27 @@ public class PatientHome extends javax.swing.JFrame {
         jScrollPane2.setViewportView(prescriptionsTable);
 
         jTabbedPane1.addTab("Prescriptions", jScrollPane2);
+
+        medicinesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Medicine ID", "Medicine Name", "Price"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(medicinesTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,9 +110,13 @@ public class PatientHome extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(userName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 498, Short.MAX_VALUE)
                         .addComponent(logoutButton)))
                 .addGap(16, 16, 16))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,7 +128,9 @@ public class PatientHome extends javax.swing.JFrame {
                     .addComponent(logoutButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addGap(76, 76, 76)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(167, Short.MAX_VALUE))
         );
 
         pack();
@@ -155,19 +186,56 @@ public class PatientHome extends javax.swing.JFrame {
 //        prescriptionsTable.setValueAt("hello", 0, 0);
         Data data = new Data();
         ArrayList<Prescription> prescriptions = data.getPrescriptions();
-        for (int i = 0; i < prescriptions.size(); i++) {
-            Prescription prescription = prescriptions.get(i);
+        ArrayList<Prescription> patientPrescs = new ArrayList<>();
+        
+        for(Prescription p: prescriptions) {
+            if(p.getPatient().getUsername().equals(this.patient.getUsername()) ) {
+                patientPrescs.add(p);
+            }
+        }
+        for (int i = 0; i < patientPrescs.size(); i++) {
+            Prescription prescription = patientPrescs.get(i);
             prescriptionsTable.setValueAt(prescription.getID(), i, 0);
             prescriptionsTable.setValueAt(prescription.getDoctor().getName(), i, 1);
+            prescriptionsTable.setValueAt(prescription.getTotalPrice(), i, 2);
             
         }
+        prescriptionsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            public void valueChanged(ListSelectionEvent event) {
+                
+                System.out.println(prescriptionsTable.getValueAt(prescriptionsTable.getSelectedRow(), 0).toString());
+                // do some actions here, for example
+                // print first column value from selected row
+                String prescriptionID = prescriptionsTable.getValueAt(prescriptionsTable.getSelectedRow(), 0).toString();
+                Prescription foundPrescription = null;
+                for (Prescription prescrip : prescriptions) {
+                    if (prescrip.getID().equals(prescriptionID)) {
+                        foundPrescription = prescrip;
+                        break;
+                    }
+                }
+                if (foundPrescription != null) {
+                    ArrayList<Medicine> medicines = foundPrescription.getMedicines();
+                    for (int i = 0; i < medicines.size(); i++) {
+                        Medicine med = medicines.get(i);
+                        medicinesTable.setValueAt(med.getID(), i, 0);
+                        medicinesTable.setValueAt(med.getName(), i, 1);
+                        medicinesTable.setValueAt(med.getPrice(), i, 2);
+
+                    }
+                }
+            }
+        });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton logoutButton;
+    private javax.swing.JTable medicinesTable;
     private javax.swing.JTable prescriptionsTable;
     private javax.swing.JLabel userName;
     // End of variables declaration//GEN-END:variables
