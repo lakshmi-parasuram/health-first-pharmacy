@@ -151,6 +151,7 @@ public class Login extends javax.swing.JFrame {
                 ManagerHome managerHome = new ManagerHome();
                 
                 managerHome.setManager((Manager)foundUser);
+                managerHome.hideInitialElements();
                 managerHome.startUI();
                 managerHome.setVisible(true);
                 dispose();

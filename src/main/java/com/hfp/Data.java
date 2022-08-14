@@ -1,6 +1,7 @@
 package com.hfp;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -169,7 +170,13 @@ public class Data {
             Medicine med = medicines.get(i);
             MedicineWithQuantity medWithQ = new MedicineWithQuantity();
             medWithQ.setMedicine(med);
-            medWithQ.setQuantity(i+1);
+            
+            if (i == 0) {
+                medWithQ.setQuantity(i);
+            } else {
+                Random random = new Random();
+                medWithQ.setQuantity(random.nextInt(11));
+            }
             medicinesWithQuantity.add(medWithQ);
         }
         inventory.setMedicinesWithQuantity(medicinesWithQuantity);

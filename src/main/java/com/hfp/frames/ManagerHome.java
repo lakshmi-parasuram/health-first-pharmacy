@@ -7,9 +7,12 @@ package com.hfp.frames;
 import com.hfp.Data;
 import com.hfp.Inventory;
 import com.hfp.Login;
+import com.hfp.Medicine;
 import com.hfp.Manager;
 import com.hfp.MedicineWithQuantity;
 import java.util.ArrayList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -18,6 +21,27 @@ import java.util.ArrayList;
 public class ManagerHome extends javax.swing.JFrame {
     
     private Manager manager;
+    private MedicineWithQuantity selectedMedicineWithQuantity;
+
+    public MedicineWithQuantity getSelectedMedicineWithQuantity() {
+        return selectedMedicineWithQuantity;
+    }
+
+    public void setSelectedMedicineWithQuantity(MedicineWithQuantity selectedMedicineWithQuantity) {
+        this.selectedMedicineWithQuantity = selectedMedicineWithQuantity;
+    }
+    private Inventory inventory;
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
+    
+    
+
     /**
      * Creates new form ManagerHome
      */
@@ -40,22 +64,31 @@ public class ManagerHome extends javax.swing.JFrame {
         logoutButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
+        newMedicineFrame = new javax.swing.JInternalFrame();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        newMedicineNameLabel = new javax.swing.JLabel();
+        newMedicinePriceLabel = new javax.swing.JLabel();
+        newMedQuantityInput = new javax.swing.JTextField();
+        newMedicineButton = new javax.swing.JButton();
+        orderPlacedLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Medicine Name", "Price", "Quantity"
+                "ID", "Medicine Name", "Price", "Quantity", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -75,13 +108,84 @@ public class ManagerHome extends javax.swing.JFrame {
 
         jLabel1.setText("Hello");
 
+        newMedicineFrame.setVisible(true);
+
+        jLabel2.setText("Medicine Name");
+
+        jLabel3.setText("Price");
+
+        jLabel4.setText("Quantity");
+
+        newMedicineNameLabel.setText("Name");
+
+        newMedicinePriceLabel.setText("price");
+
+        newMedQuantityInput.setText("1");
+        newMedQuantityInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newMedQuantityInputActionPerformed(evt);
+            }
+        });
+
+        newMedicineButton.setText("Order");
+        newMedicineButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newMedicineButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout newMedicineFrameLayout = new javax.swing.GroupLayout(newMedicineFrame.getContentPane());
+        newMedicineFrame.getContentPane().setLayout(newMedicineFrameLayout);
+        newMedicineFrameLayout.setHorizontalGroup(
+            newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newMedicineFrameLayout.createSequentialGroup()
+                .addGroup(newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newMedicineFrameLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(newMedQuantityInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(newMedicinePriceLabel)
+                            .addComponent(newMedicineNameLabel)))
+                    .addGroup(newMedicineFrameLayout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(newMedicineButton)))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        newMedicineFrameLayout.setVerticalGroup(
+            newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newMedicineFrameLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(newMedicineNameLabel))
+                .addGap(18, 18, 18)
+                .addGroup(newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(newMedicinePriceLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(newMedQuantityInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(newMedicineButton)
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+
+        orderPlacedLabel.setForeground(new java.awt.Color(51, 153, 0));
+        orderPlacedLabel.setText("Order Placed Successfully.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
                 .addGap(113, 113, 113))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(39, 39, 39)
@@ -91,6 +195,15 @@ public class ManagerHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logoutButton)
                 .addGap(100, 100, 100))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(288, 288, 288)
+                        .addComponent(orderPlacedLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(223, 223, 223)
+                        .addComponent(newMedicineFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,7 +215,11 @@ public class ManagerHome extends javax.swing.JFrame {
                     .addComponent(nameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(orderPlacedLabel)
+                .addGap(18, 18, 18)
+                .addComponent(newMedicineFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         pack();
@@ -113,6 +230,31 @@ public class ManagerHome extends javax.swing.JFrame {
         loginScreen.setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void newMedicineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedicineButtonActionPerformed
+        orderPlacedLabel.setVisible(true);
+        newMedicineFrame.setVisible(false);
+       MedicineWithQuantity selectedMedicineWithQuantity= getSelectedMedicineWithQuantity();
+       Inventory inventory = this.getInventory();
+       ArrayList<MedicineWithQuantity> medsWithQuantity = inventory.getMedicinesWithQuantity();
+       MedicineWithQuantity foundMedicineWithQuantity = null;
+       for(MedicineWithQuantity medicineWithQuantity: medsWithQuantity) {
+           if(selectedMedicineWithQuantity.getMedicine().getID().equals(medicineWithQuantity.getMedicine().getID())) {
+               foundMedicineWithQuantity = medicineWithQuantity;
+               break;
+           }
+       }
+       if (foundMedicineWithQuantity != null) {           
+           foundMedicineWithQuantity.setQuantity(Integer.parseInt(newMedQuantityInput.getText()));
+       }
+        setInventory(inventory);
+       startUI();
+    }//GEN-LAST:event_newMedicineButtonActionPerformed
+
+    private void newMedQuantityInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedQuantityInputActionPerformed
+        
+        
+    }//GEN-LAST:event_newMedQuantityInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,15 +290,24 @@ public class ManagerHome extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void setManager(Manager manager) {
         this.manager = manager;
     }
-
+    
+    public void hideInitialElements() {
+        orderPlacedLabel.setVisible(false);
+        newMedicineFrame.setVisible(false);
+    }
+    
     public void startUI() {
         nameLabel.setText(this.manager.getUsername());
         Data data = new Data();
-        Inventory inventory = data.getInventory();
+        Inventory inventory = this.getInventory();
+        if (inventory == null) {
+            inventory = data.getInventory();
+            setInventory(inventory);
+        }
         ArrayList<MedicineWithQuantity> medsWithQuantity = inventory.getMedicinesWithQuantity();
         for (int i = 0; i < medsWithQuantity.size(); i++) {
             MedicineWithQuantity medWithQuantity = medsWithQuantity.get(i);
@@ -164,16 +315,56 @@ public class ManagerHome extends javax.swing.JFrame {
             inventoryTable.setValueAt(medWithQuantity.getMedicine().getName(), i, 1);
             inventoryTable.setValueAt(medWithQuantity.getMedicine().getPrice(), i, 2);
             inventoryTable.setValueAt(medWithQuantity.getQuantity(), i, 3);
-            
+            int quantity = medWithQuantity.getQuantity();
+            if (quantity > 0) {
+                inventoryTable.setValueAt("Available", i, 4);
+                
+            } else {
+                inventoryTable.setValueAt("Unavailable", i, 4);
+                
+            }
+            inventoryTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                public void valueChanged(ListSelectionEvent event) {
+                    int quantity = (int) inventoryTable.getValueAt(inventoryTable.getSelectedRow(), 3);
+                    if (quantity == 0) {
+                        MedicineWithQuantity selectedMedicineWithQuantity = new MedicineWithQuantity();
+                        Medicine medicine = new Medicine();
+                        String ID = inventoryTable.getValueAt(inventoryTable.getSelectedRow(), 0).toString();
+                        String name = inventoryTable.getValueAt(inventoryTable.getSelectedRow(), 1).toString();
+                        double price = (double)inventoryTable.getValueAt(inventoryTable.getSelectedRow(), 2);
+                        medicine.setID(ID);
+                        medicine.setName(name);
+                        medicine.setPrice(price);
+                        selectedMedicineWithQuantity.setMedicine(medicine);
+                        selectedMedicineWithQuantity.setQuantity(1);
+                        setSelectedMedicineWithQuantity(selectedMedicineWithQuantity);
+                        newMedicineFrame.setVisible(true);
+                        newMedicineNameLabel.setText(name);
+                        newMedicinePriceLabel.setText(new Double(price).toString());
+                    } else {
+                        newMedicineFrame.setVisible(false);
+                        setSelectedMedicineWithQuantity(null);
+                    }
+                }
+            });
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable inventoryTable;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton logoutButton;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextField newMedQuantityInput;
+    private javax.swing.JButton newMedicineButton;
+    private javax.swing.JInternalFrame newMedicineFrame;
+    private javax.swing.JLabel newMedicineNameLabel;
+    private javax.swing.JLabel newMedicinePriceLabel;
+    private javax.swing.JLabel orderPlacedLabel;
     // End of variables declaration//GEN-END:variables
 }
