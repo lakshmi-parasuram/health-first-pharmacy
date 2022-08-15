@@ -56,6 +56,8 @@ public class Data {
         
         ArrayList<Patient> patients = this.getPatients();
         prescription.setPatient(patients.get(0));
+        // 
+        prescription.setStatus(Prescription.Status.MEDS_NOT_AVAIL);
         double totalPrice = 0;
         ArrayList<Medicine> allMedicines = this.getMedicines();
         ArrayList<Medicine> presMeds = new ArrayList<>();
@@ -76,6 +78,8 @@ public class Data {
         presc2.setDoctor(doctors.get(1));
         
         presc2.setPatient(patients.get(1));
+        
+        presc2.setStatus(Prescription.Status.PAID);
         
         ArrayList<Medicine> presMeds2 = new ArrayList<>();
         totalPrice = 0;

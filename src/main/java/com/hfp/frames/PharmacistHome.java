@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.hfp.frames;
+
 import com.hfp.Data;
 import com.hfp.Login;
 import com.hfp.Medicine;
@@ -17,8 +18,27 @@ import javax.swing.event.ListSelectionListener;
  * @author Lakshmi Parasuram <lakshmibhavani1712@gmail.com>
  */
 public class PharmacistHome extends javax.swing.JFrame {
-    
+
     private Pharmacist pharmacist;
+
+    private Prescription selectedPrescription;
+    private ArrayList<Prescription> prescriptions;
+
+    public ArrayList<Prescription> getPrescriptions() {
+        return prescriptions;
+    }
+
+    public void setPrescriptions(ArrayList<Prescription> prescriptions) {
+        this.prescriptions = prescriptions;
+    }
+
+    public Prescription getSelectedPrescription() {
+        return selectedPrescription;
+    }
+
+    public void setSelectedPrescription(Prescription selectedPrescription) {
+        this.selectedPrescription = selectedPrescription;
+    }
 
     public Pharmacist getPharmacist() {
         return pharmacist;
@@ -47,38 +67,16 @@ public class PharmacistHome extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        prescriptionsTable = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         medicinesTable = new javax.swing.JTable();
         logoutButton = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        prescriptionsTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Hello");
-
-        prescriptionsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "ID", "Doctor", "Price Total"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(prescriptionsTable);
-
-        jTabbedPane1.addTab("Prescriptions", jScrollPane2);
 
         medicinesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -108,30 +106,59 @@ public class PharmacistHome extends javax.swing.JFrame {
             }
         });
 
+        updateButton.setText("Update");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
+
+        prescriptionsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Doctor", "Patient", "Price Total", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(prescriptionsTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(280, 280, 280)
+                .addComponent(updateButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(nameLabel)
-                        .addContainerGap(593, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(logoutButton)
-                        .addGap(103, 103, 103))))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(logoutButton)))
+                .addGap(39, 39, 39))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(143, Short.MAX_VALUE)))
+                    .addContainerGap(178, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,14 +172,18 @@ public class PharmacistHome extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(logoutButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96))
+                .addGap(48, 48, 48)
+                .addComponent(updateButton)
+                .addGap(55, 55, 55))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(79, 79, 79)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(238, Short.MAX_VALUE)))
+                    .addContainerGap(322, Short.MAX_VALUE)))
         );
 
         pack();
@@ -163,6 +194,19 @@ public class PharmacistHome extends javax.swing.JFrame {
         loginScreen.setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Prescription> prescs = getPrescriptions();
+        Prescription selectedPrescription = getSelectedPrescription();
+        for (Prescription prescrip : prescs) {
+            if (prescrip.getID().equals(selectedPrescription.getID())) {
+                prescrip.setStatus(prescrip.getNextStatus(prescrip.getStatus()));
+                break;
+            }
+        }
+        startUI();
+    }//GEN-LAST:event_updateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,30 +242,38 @@ public class PharmacistHome extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void startUI() {
         nameLabel.setText(this.pharmacist.getUsername());
-
+        updateButton.setVisible(false);
         Data data = new Data();
-        ArrayList<Prescription> prescriptions = data.getPrescriptions();
-        for (int i = 0; i < prescriptions.size(); i++) {
-            Prescription prescription = prescriptions.get(i);
+        ArrayList<Prescription> prescs = this.getPrescriptions();//; 
+        if (prescs == null) {
+            prescs = data.getPrescriptions();
+            this.setPrescriptions(prescs);
+        }
+        for (int i = 0; i < prescs.size(); i++) {
+            Prescription prescription = prescs.get(i);
             prescriptionsTable.setValueAt(prescription.getID(), i, 0);
             prescriptionsTable.setValueAt(prescription.getDoctor().getName(), i, 1);
-            prescriptionsTable.setValueAt(prescription.getTotalPrice(), i, 2);
-            
+            prescriptionsTable.setValueAt(prescription.getPatient().getUsername(), i, 2);
+            prescriptionsTable.setValueAt(prescription.getTotalPrice(), i, 3);
+            prescriptionsTable.setValueAt(prescription.getStatusString(prescription.getStatus()), i, 4);
+
         }
-        prescriptionsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+        prescriptionsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
-                
+
                 System.out.println(prescriptionsTable.getValueAt(prescriptionsTable.getSelectedRow(), 0).toString());
                 // do some actions here, for example
                 // print first column value from selected row
                 String prescriptionID = prescriptionsTable.getValueAt(prescriptionsTable.getSelectedRow(), 0).toString();
                 Prescription foundPrescription = null;
-                for (Prescription prescrip : prescriptions) {
+                ArrayList<Prescription> prescs = getPrescriptions();
+                for (Prescription prescrip : prescs) {
                     if (prescrip.getID().equals(prescriptionID)) {
                         foundPrescription = prescrip;
+                        setSelectedPrescription(foundPrescription);
                         break;
                     }
                 }
@@ -234,10 +286,27 @@ public class PharmacistHome extends javax.swing.JFrame {
                         medicinesTable.setValueAt(med.getPrice(), i, 2);
 
                     }
+                    switch (foundPrescription.getStatus()) {
+                        case MEDS_NOT_AVAIL:
+                            updateButton.setText("Order Missing Medicines");
+                            updateButton.setVisible(true);
+                            break;
+                        case PAYMENT_PENDING:
+                            updateButton.setText("Notify Payment Pending");
+                            updateButton.setVisible(true);
+                            break;
+                        case PAID:
+                            updateButton.setText("Dispense");
+                            updateButton.setVisible(true);
+                            break;
+                        default:
+                            updateButton.setVisible(false);
+                            break;
+                    }
                 }
             }
         });
-    
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -249,9 +318,7 @@ public class PharmacistHome extends javax.swing.JFrame {
     private javax.swing.JTable medicinesTable;
     private javax.swing.JLabel nameLabel;
     private javax.swing.JTable prescriptionsTable;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 
-    
-
-   
 }
