@@ -9,6 +9,7 @@ import com.hfp.Manager;
 import com.hfp.MedicineWithQuantity;
 import com.hfp.Medicine;
 import com.hfp.Pharmacist;
+import com.hfp.Prescription;
 import com.hfp.User;
 import java.util.ArrayList;
 
@@ -62,6 +63,8 @@ public class AdminHome extends javax.swing.JFrame {
         usersTable = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         inventoryTable = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        prescriptionsTable = new javax.swing.JTable();
         newMedicineFrame = new javax.swing.JInternalFrame();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -80,6 +83,8 @@ public class AdminHome extends javax.swing.JFrame {
         addNewUserButton = new javax.swing.JButton();
         newUserNameInput = new javax.swing.JTextField();
         rolesList = new javax.swing.JComboBox<>();
+        remindForMedicinesButton = new javax.swing.JButton();
+        reminderLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,6 +156,21 @@ public class AdminHome extends javax.swing.JFrame {
         jScrollPane1.setViewportView(inventoryTable);
 
         jTabbedPane1.addTab("Medicines", jScrollPane1);
+
+        prescriptionsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Doctor", "Patient", "Price Total"
+            }
+        ));
+        jScrollPane3.setViewportView(prescriptionsTable);
+
+        jTabbedPane1.addTab("Sales", jScrollPane3);
 
         newMedicineFrame.setVisible(true);
 
@@ -326,6 +346,16 @@ public class AdminHome extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
+        remindForMedicinesButton.setText("Remind Patients");
+        remindForMedicinesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                remindForMedicinesButtonActionPerformed(evt);
+            }
+        });
+
+        reminderLabel.setForeground(new java.awt.Color(102, 153, 0));
+        reminderLabel.setText("Reminder sent to Patients collect prescriptions");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -336,6 +366,8 @@ public class AdminHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(remindForMedicinesButton)
+                .addGap(18, 18, 18)
                 .addComponent(newUserButton)
                 .addGap(18, 18, 18)
                 .addComponent(newProductButton)
@@ -343,10 +375,15 @@ public class AdminHome extends javax.swing.JFrame {
                 .addComponent(logoutButton)
                 .addGap(34, 34, 34))
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(newMedicineFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(newUserFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(newMedicineFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(newUserFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(437, 437, 437)
+                        .addComponent(reminderLabel)))
                 .addContainerGap(128, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -363,19 +400,21 @@ public class AdminHome extends javax.swing.JFrame {
                     .addComponent(nameLabel)
                     .addComponent(logoutButton)
                     .addComponent(newProductButton)
-                    .addComponent(newUserButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
+                    .addComponent(newUserButton)
+                    .addComponent(remindForMedicinesButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 207, Short.MAX_VALUE)
+                .addComponent(reminderLabel)
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(newMedicineFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(newUserFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)))
-                .addGap(21, 21, 21))
+                        .addGap(57, 57, 57))
+                    .addComponent(newMedicineFrame, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(87, 87, 87)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(370, Short.MAX_VALUE)))
+                    .addContainerGap(428, Short.MAX_VALUE)))
         );
 
         pack();
@@ -392,7 +431,7 @@ public class AdminHome extends javax.swing.JFrame {
     }//GEN-LAST:event_newMedQuantityInputActionPerformed
 
     private void newMedicineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedicineButtonActionPerformed
-
+        reminderLabel.setVisible(false);
         newMedicineFrame.setVisible(false);
         Inventory inventory = this.getInventory();
         ArrayList<MedicineWithQuantity> medsWithQuantity = inventory.getMedicinesWithQuantity();
@@ -421,18 +460,20 @@ public class AdminHome extends javax.swing.JFrame {
     }//GEN-LAST:event_newMedIdActionPerformed
 
     private void newProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProductButtonActionPerformed
-
+        reminderLabel.setVisible(false);
         newMedicineFrame.setVisible(true);
-
+newUserFrame.setVisible(false);
     }//GEN-LAST:event_newProductButtonActionPerformed
 
     private void newUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserButtonActionPerformed
-        // TODO add your handling code here:
+        reminderLabel.setVisible(false);
         newUserFrame.setVisible(true);
+         newMedicineFrame.setVisible(false);
     }//GEN-LAST:event_newUserButtonActionPerformed
 
     private void addNewUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewUserButtonActionPerformed
         newUserFrame.setVisible(false);
+        reminderLabel.setVisible(false);
         String role = (String) rolesList.getSelectedItem();
         User u;
         ArrayList<User> users = getUsers();
@@ -464,6 +505,13 @@ public class AdminHome extends javax.swing.JFrame {
     private void rolesListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolesListActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_rolesListActionPerformed
+
+    private void remindForMedicinesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remindForMedicinesButtonActionPerformed
+        // TODO add your handling code here:
+        reminderLabel.setVisible(true);
+        newUserFrame.setVisible(false);
+         newMedicineFrame.setVisible(false);
+    }//GEN-LAST:event_remindForMedicinesButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -512,6 +560,7 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton logoutButton;
     private javax.swing.JLabel nameLabel;
@@ -525,6 +574,9 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JButton newUserButton;
     private javax.swing.JInternalFrame newUserFrame;
     private javax.swing.JTextField newUserNameInput;
+    private javax.swing.JTable prescriptionsTable;
+    private javax.swing.JButton remindForMedicinesButton;
+    private javax.swing.JLabel reminderLabel;
     private javax.swing.JComboBox<String> rolesList;
     private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
@@ -535,6 +587,7 @@ public class AdminHome extends javax.swing.JFrame {
 
     public void startUI() {
         newMedicineFrame.setVisible(false);
+        reminderLabel.setVisible(false);
         newUserFrame.setVisible(false);
         nameLabel.setText(this.admin.getUsername());
         Data data = new Data();
@@ -575,6 +628,16 @@ public class AdminHome extends javax.swing.JFrame {
             inventoryTable.setValueAt(medWithQuantity.getMedicine().getName(), i, 1);
             inventoryTable.setValueAt(medWithQuantity.getMedicine().getPrice(), i, 2);
             inventoryTable.setValueAt(medWithQuantity.getQuantity(), i, 3);
+        }
+        
+        ArrayList<Prescription> prescs = data.getPrescriptions();
+        for (int i = 0; i < prescs.size(); i++) {
+            Prescription prescription = prescs.get(i);
+            prescriptionsTable.setValueAt(prescription.getID(), i, 0);
+            prescriptionsTable.setValueAt(prescription.getDoctor().getName(), i, 1);
+            prescriptionsTable.setValueAt(prescription.getPatient().getUsername(), i, 2);
+            prescriptionsTable.setValueAt(prescription.getTotalPrice(), i, 3);
+
         }
 
     }
