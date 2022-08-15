@@ -2,10 +2,12 @@ package com.hfp.frames;
 
 import com.hfp.Admin;
 import com.hfp.Data;
+import com.hfp.Inventory;
 import com.hfp.Login;
 import com.hfp.Patient;
 import com.hfp.Manager;
-
+import com.hfp.MedicineWithQuantity;
+import com.hfp.Medicine;
 import com.hfp.Pharmacist;
 import com.hfp.User;
 import java.util.ArrayList;
@@ -17,6 +19,24 @@ import java.util.ArrayList;
 public class AdminHome extends javax.swing.JFrame {
 
     private Admin admin;
+    private ArrayList<User> users;
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+    }
+    private Inventory inventory;
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
 
     /**
      * Creates new form AdminHome
@@ -40,6 +60,26 @@ public class AdminHome extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         usersTable = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        inventoryTable = new javax.swing.JTable();
+        newMedicineFrame = new javax.swing.JInternalFrame();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        newMedQuantityInput = new javax.swing.JTextField();
+        newMedicineButton = new javax.swing.JButton();
+        newMedName = new javax.swing.JTextField();
+        newMedPrice = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        newMedId = new javax.swing.JTextField();
+        newProductButton = new javax.swing.JButton();
+        newUserButton = new javax.swing.JButton();
+        newUserFrame = new javax.swing.JInternalFrame();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        addNewUserButton = new javax.swing.JButton();
+        newUserNameInput = new javax.swing.JTextField();
+        rolesList = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,6 +123,209 @@ public class AdminHome extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Users", jScrollPane2);
 
+        inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Name", "Price", "Quantity"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(inventoryTable);
+
+        jTabbedPane1.addTab("Medicines", jScrollPane1);
+
+        newMedicineFrame.setVisible(true);
+
+        jLabel2.setText("Medicine Name");
+
+        jLabel3.setText("Price");
+
+        jLabel4.setText("Quantity");
+
+        newMedQuantityInput.setText("1");
+        newMedQuantityInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newMedQuantityInputActionPerformed(evt);
+            }
+        });
+
+        newMedicineButton.setText("Add");
+        newMedicineButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newMedicineButtonActionPerformed(evt);
+            }
+        });
+
+        newMedName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newMedNameActionPerformed(evt);
+            }
+        });
+
+        newMedPrice.setText("1");
+        newMedPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newMedPriceActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Med ID");
+
+        newMedId.setText("m");
+        newMedId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newMedIdActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout newMedicineFrameLayout = new javax.swing.GroupLayout(newMedicineFrame.getContentPane());
+        newMedicineFrame.getContentPane().setLayout(newMedicineFrameLayout);
+        newMedicineFrameLayout.setHorizontalGroup(
+            newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newMedicineFrameLayout.createSequentialGroup()
+                .addContainerGap(83, Short.MAX_VALUE)
+                .addGroup(newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addGroup(newMedicineFrameLayout.createSequentialGroup()
+                        .addGroup(newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGroup(newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(newMedicineFrameLayout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addGroup(newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(newMedicineButton)
+                                    .addComponent(newMedQuantityInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(newMedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(newMedicineFrameLayout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addGroup(newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(newMedName, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(newMedId, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(33, 33, 33))
+        );
+        newMedicineFrameLayout.setVerticalGroup(
+            newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newMedicineFrameLayout.createSequentialGroup()
+                .addContainerGap(86, Short.MAX_VALUE)
+                .addGroup(newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(newMedId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(newMedName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(newMedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(newMedicineFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(newMedQuantityInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(newMedicineButton)
+                .addGap(19, 19, 19))
+        );
+
+        newProductButton.setText("New Product");
+        newProductButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newProductButtonActionPerformed(evt);
+            }
+        });
+
+        newUserButton.setText("New User");
+        newUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newUserButtonActionPerformed(evt);
+            }
+        });
+
+        newUserFrame.setVisible(true);
+
+        jLabel6.setText("User name");
+
+        jLabel7.setText("Role");
+
+        addNewUserButton.setText("Add");
+        addNewUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addNewUserButtonActionPerformed(evt);
+            }
+        });
+
+        newUserNameInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newUserNameInputActionPerformed(evt);
+            }
+        });
+
+        rolesList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Patient", "Pharmacist", "Manager", "Admin" }));
+        rolesList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rolesListActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout newUserFrameLayout = new javax.swing.GroupLayout(newUserFrame.getContentPane());
+        newUserFrame.getContentPane().setLayout(newUserFrameLayout);
+        newUserFrameLayout.setHorizontalGroup(
+            newUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newUserFrameLayout.createSequentialGroup()
+                .addContainerGap(59, Short.MAX_VALUE)
+                .addGroup(newUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addGroup(newUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newUserFrameLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(addNewUserButton))
+                    .addGroup(newUserFrameLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(newUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rolesList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(newUserNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(33, 33, 33))
+        );
+        newUserFrameLayout.setVerticalGroup(
+            newUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newUserFrameLayout.createSequentialGroup()
+                .addContainerGap(79, Short.MAX_VALUE)
+                .addGroup(newUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(newUserNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(newUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(newUserFrameLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7))
+                    .addGroup(newUserFrameLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(rolesList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(54, 54, 54)
+                .addComponent(addNewUserButton)
+                .addGap(19, 19, 19))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,13 +335,23 @@ public class AdminHome extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 633, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(newUserButton)
+                .addGap(18, 18, 18)
+                .addComponent(newProductButton)
+                .addGap(18, 18, 18)
                 .addComponent(logoutButton)
                 .addGap(34, 34, 34))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(newMedicineFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(newUserFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(128, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(18, 18, 18)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 999, Short.MAX_VALUE)
                     .addGap(19, 19, 19)))
         );
         layout.setVerticalGroup(
@@ -108,8 +361,16 @@ public class AdminHome extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(nameLabel)
-                    .addComponent(logoutButton))
-                .addContainerGap(554, Short.MAX_VALUE))
+                    .addComponent(logoutButton)
+                    .addComponent(newProductButton)
+                    .addComponent(newUserButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(newMedicineFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(newUserFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)))
+                .addGap(21, 21, 21))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(87, 87, 87)
@@ -125,6 +386,84 @@ public class AdminHome extends javax.swing.JFrame {
         loginScreen.setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void newMedQuantityInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedQuantityInputActionPerformed
+
+    }//GEN-LAST:event_newMedQuantityInputActionPerformed
+
+    private void newMedicineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedicineButtonActionPerformed
+
+        newMedicineFrame.setVisible(false);
+        Inventory inventory = this.getInventory();
+        ArrayList<MedicineWithQuantity> medsWithQuantity = inventory.getMedicinesWithQuantity();
+        Medicine medicine = new Medicine();
+        medicine.setID(newMedId.getText());
+        medicine.setName(newMedName.getText());
+        medicine.setPrice(Double.parseDouble(newMedPrice.getText()));
+        MedicineWithQuantity medWithQ = new MedicineWithQuantity();
+        medWithQ.setMedicine(medicine);
+        medWithQ.setQuantity(Integer.parseInt(newMedQuantityInput.getText()));
+        medsWithQuantity.add(medWithQ);
+        setInventory(inventory);
+        startUI();
+    }//GEN-LAST:event_newMedicineButtonActionPerformed
+
+    private void newMedNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newMedNameActionPerformed
+
+    private void newMedPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newMedPriceActionPerformed
+
+    private void newMedIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newMedIdActionPerformed
+
+    private void newProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProductButtonActionPerformed
+
+        newMedicineFrame.setVisible(true);
+
+    }//GEN-LAST:event_newProductButtonActionPerformed
+
+    private void newUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserButtonActionPerformed
+        // TODO add your handling code here:
+        newUserFrame.setVisible(true);
+    }//GEN-LAST:event_newUserButtonActionPerformed
+
+    private void addNewUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewUserButtonActionPerformed
+        newUserFrame.setVisible(false);
+        String role = (String) rolesList.getSelectedItem();
+        User u;
+        ArrayList<User> users = getUsers();
+        String name = newUserNameInput.getText();
+        switch (role) {
+            case "Admin":
+                u = new Admin(name, "1234");
+                break;
+            case "Manager":
+                u = new Manager(name, "1234");
+                break;
+            case "Pharmacist":
+                u = new Pharmacist(name, "1234");
+                break;
+            case "Patient":
+            default:
+                u = new Patient(name, "1234");
+                break;
+
+        }
+        users.add(u);
+        startUI();
+    }//GEN-LAST:event_addNewUserButtonActionPerformed
+
+    private void newUserNameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserNameInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newUserNameInputActionPerformed
+
+    private void rolesListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rolesListActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rolesListActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,11 +501,31 @@ public class AdminHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addNewUserButton;
+    private javax.swing.JTable inventoryTable;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton logoutButton;
     private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextField newMedId;
+    private javax.swing.JTextField newMedName;
+    private javax.swing.JTextField newMedPrice;
+    private javax.swing.JTextField newMedQuantityInput;
+    private javax.swing.JButton newMedicineButton;
+    private javax.swing.JInternalFrame newMedicineFrame;
+    private javax.swing.JButton newProductButton;
+    private javax.swing.JButton newUserButton;
+    private javax.swing.JInternalFrame newUserFrame;
+    private javax.swing.JTextField newUserNameInput;
+    private javax.swing.JComboBox<String> rolesList;
     private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
 
@@ -175,13 +534,18 @@ public class AdminHome extends javax.swing.JFrame {
     }
 
     public void startUI() {
+        newMedicineFrame.setVisible(false);
+        newUserFrame.setVisible(false);
         nameLabel.setText(this.admin.getUsername());
         Data data = new Data();
-        ArrayList<User> users = data.getUsers();
+        ArrayList<User> users = getUsers();
+        if (users == null) {
+            users = data.getUsers();
+            setUsers(users);
+        }
         for (int i = 0; i < users.size(); i++) {
             User user = users.get(i);
             if (user != null) {
-
                 usersTable.setValueAt(user.getUsername(), i, 0);
                 String role = null;
                 if (user instanceof Admin) {
@@ -199,5 +563,19 @@ public class AdminHome extends javax.swing.JFrame {
             }
 
         }
+        Inventory inventory = this.getInventory();
+        if (inventory == null) {
+            inventory = data.getInventory();
+            setInventory(inventory);
+        }
+        ArrayList<MedicineWithQuantity> medsWithQuantity = inventory.getMedicinesWithQuantity();
+        for (int i = 0; i < medsWithQuantity.size(); i++) {
+            MedicineWithQuantity medWithQuantity = medsWithQuantity.get(i);
+            inventoryTable.setValueAt(medWithQuantity.getMedicine().getID(), i, 0);
+            inventoryTable.setValueAt(medWithQuantity.getMedicine().getName(), i, 1);
+            inventoryTable.setValueAt(medWithQuantity.getMedicine().getPrice(), i, 2);
+            inventoryTable.setValueAt(medWithQuantity.getQuantity(), i, 3);
+        }
+
     }
 }
