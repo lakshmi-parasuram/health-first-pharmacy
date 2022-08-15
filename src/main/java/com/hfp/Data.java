@@ -38,8 +38,19 @@ public class Data {
         ArrayList<Patient> patients = new ArrayList<>();
         
         Patient patient1 = new Patient("patient1", "1234");
+        Insurance ins = new Insurance();
+        ins.setInsuranceNumber("NHS123");
+        ins.setProvider("NHS");
+        patient1.setInsurance(ins);
         patients.add(patient1);
         Patient patient2 = new Patient("patient2", "1234");
+        CreditCard cc = new CreditCard();
+        cc.setCardNo("1234 5678 9012");
+        cc.setCvv("xxx");
+        cc.setExpiryMonth("12");
+        cc.setExpiryYear("2024");
+        cc.setNameOnCard("Patient 2");
+        patient2.setCreditCard(cc);
         patients.add(patient2);
         return patients;
     }
@@ -71,6 +82,26 @@ public class Data {
         prescription.setTotalPrice(totalPrice);
         
         prescriptions.add(prescription);
+        
+        // other prescription
+        Prescription pr1 = new Prescription();
+        pr1.setID("pr223");
+        
+        pr1.setDoctor(doctors.get(0));
+        pr1.setPatient(patients.get(0));
+        pr1.setStatus(Prescription.Status.PAYMENT_PENDING);
+        totalPrice = 0;
+        ArrayList<Medicine> presMeds3 = new ArrayList<>();
+        for (int i=0; i< allMedicines.size() - 1; i++) {
+            Medicine med = allMedicines.get(i);
+            totalPrice += med.getPrice();
+            presMeds3.add(med);
+        }
+        pr1.setMedicines(presMeds3);
+        
+        pr1.setTotalPrice(totalPrice);
+        
+        prescriptions.add(pr1);
         // second prescription
         Prescription presc2 = new Prescription();
         presc2.setID("pr135");
@@ -79,7 +110,7 @@ public class Data {
         
         presc2.setPatient(patients.get(1));
         
-        presc2.setStatus(Prescription.Status.PAID);
+        presc2.setStatus(Prescription.Status.PAYMENT_PENDING);
         
         ArrayList<Medicine> presMeds2 = new ArrayList<>();
         totalPrice = 0;

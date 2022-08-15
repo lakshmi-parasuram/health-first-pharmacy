@@ -5,6 +5,8 @@ import com.hfp.Login;
 import com.hfp.Medicine;
 import com.hfp.Patient;
 import com.hfp.Prescription;
+import com.hfp.Insurance;
+import com.hfp.CreditCard;
 import java.util.ArrayList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -14,6 +16,26 @@ import javax.swing.event.ListSelectionListener;
  * @author Lakshmi Parasuram <lakshmibhavani1712@gmail.com>
  */
 public class PatientHome extends javax.swing.JFrame {
+    
+    private ArrayList<Prescription> allPrescriptions;
+    
+    public ArrayList<Prescription> getAllPrescriptions() {
+        return allPrescriptions;
+    }
+    
+    public void setAllPrescriptions(ArrayList<Prescription> allPrescriptions) {
+        this.allPrescriptions = allPrescriptions;
+    }
+    
+    private Prescription selectedPrescription;
+    
+    public Prescription getSelectedPrescription() {
+        return selectedPrescription;
+    }
+    
+    public void setSelectedPrescription(Prescription selectedPrescription) {
+        this.selectedPrescription = selectedPrescription;
+    }
 
     /**
      * Creates new form PatientHome
@@ -39,8 +61,30 @@ public class PatientHome extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         prescriptionsTable = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        viewOrAddCreditCardButton = new javax.swing.JButton();
+        viewOrAddInsuranceButton = new javax.swing.JButton();
+        medicinesPanel = new javax.swing.JPanel();
+        medicinesTableScrollPane = new javax.swing.JScrollPane();
         medicinesTable = new javax.swing.JTable();
+        payWithInsurance = new javax.swing.JButton();
+        payWithCreditCardButton = new javax.swing.JButton();
+        insurancePanel = new javax.swing.JPanel();
+        onInsuranceSave = new javax.swing.JButton();
+        insuranceNumberTextInput = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        insuranceProviderTextInput = new javax.swing.JTextField();
+        creditCardPanel = new javax.swing.JPanel();
+        onCreditCardSave = new javax.swing.JButton();
+        ccNumberInput = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        ccYearInput = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        ccMonthInput = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        creditCvv = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,17 +99,17 @@ public class PatientHome extends javax.swing.JFrame {
 
         prescriptionsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Doctor", "Price Total"
+                "ID", "Doctor", "Price Total", "Status", "Payment Method"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -75,6 +119,20 @@ public class PatientHome extends javax.swing.JFrame {
         jScrollPane2.setViewportView(prescriptionsTable);
 
         jTabbedPane1.addTab("Prescriptions", jScrollPane2);
+
+        viewOrAddCreditCardButton.setText("View/Edit Credit Cards");
+        viewOrAddCreditCardButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewOrAddCreditCardButtonActionPerformed(evt);
+            }
+        });
+
+        viewOrAddInsuranceButton.setText("View/Add Insurance");
+        viewOrAddInsuranceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewOrAddInsuranceButtonActionPerformed(evt);
+            }
+        });
 
         medicinesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,7 +153,215 @@ public class PatientHome extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(medicinesTable);
+        medicinesTableScrollPane.setViewportView(medicinesTable);
+
+        javax.swing.GroupLayout medicinesPanelLayout = new javax.swing.GroupLayout(medicinesPanel);
+        medicinesPanel.setLayout(medicinesPanelLayout);
+        medicinesPanelLayout.setHorizontalGroup(
+            medicinesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 674, Short.MAX_VALUE)
+            .addGroup(medicinesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(medicinesPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(medicinesTableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        medicinesPanelLayout.setVerticalGroup(
+            medicinesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 139, Short.MAX_VALUE)
+            .addGroup(medicinesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(medicinesPanelLayout.createSequentialGroup()
+                    .addGap(15, 15, 15)
+                    .addComponent(medicinesTableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(16, Short.MAX_VALUE)))
+        );
+
+        payWithInsurance.setText("Pay With Insurance");
+        payWithInsurance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payWithInsuranceActionPerformed(evt);
+            }
+        });
+
+        payWithCreditCardButton.setText("Pay With Credit Card");
+        payWithCreditCardButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payWithCreditCardButtonActionPerformed(evt);
+            }
+        });
+
+        onInsuranceSave.setText("Save");
+        onInsuranceSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onInsuranceSaveActionPerformed(evt);
+            }
+        });
+
+        insuranceNumberTextInput.setText("Insurance Number");
+        insuranceNumberTextInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insuranceNumberTextInputActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Insurance Number");
+
+        jLabel4.setText("Insurance Provider");
+
+        insuranceProviderTextInput.setText("Insurance Number");
+        insuranceProviderTextInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                insuranceProviderTextInputActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout insurancePanelLayout = new javax.swing.GroupLayout(insurancePanel);
+        insurancePanel.setLayout(insurancePanelLayout);
+        insurancePanelLayout.setHorizontalGroup(
+            insurancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(insurancePanelLayout.createSequentialGroup()
+                .addGroup(insurancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(insurancePanelLayout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(onInsuranceSave))
+                    .addGroup(insurancePanelLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(insurancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(insurancePanelLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(insuranceProviderTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(insurancePanelLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(insuranceNumberTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        insurancePanelLayout.setVerticalGroup(
+            insurancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, insurancePanelLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(insurancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(insuranceNumberTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(insurancePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(insuranceProviderTextInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(onInsuranceSave)
+                .addGap(36, 36, 36))
+        );
+
+        onCreditCardSave.setText("Save");
+        onCreditCardSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                onCreditCardSaveActionPerformed(evt);
+            }
+        });
+
+        ccNumberInput.setText("CC Number");
+        ccNumberInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ccNumberInputActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Number");
+
+        jLabel6.setText("Expiry Month");
+
+        ccYearInput.setText("year");
+        ccYearInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ccYearInputActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Credit Card Details");
+
+        jLabel8.setText("Expiry Year");
+
+        ccMonthInput.setText("Month");
+        ccMonthInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ccMonthInputActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("CVV");
+
+        creditCvv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creditCvvActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout creditCardPanelLayout = new javax.swing.GroupLayout(creditCardPanel);
+        creditCardPanel.setLayout(creditCardPanelLayout);
+        creditCardPanelLayout.setHorizontalGroup(
+            creditCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(creditCardPanelLayout.createSequentialGroup()
+                .addGroup(creditCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(creditCardPanelLayout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(jLabel7))
+                    .addGroup(creditCardPanelLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(creditCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(creditCardPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(ccYearInput, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(creditCardPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(ccMonthInput, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(creditCardPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ccNumberInput, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(creditCardPanelLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel9))))
+                    .addGroup(creditCardPanelLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(onCreditCardSave)))
+                .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(creditCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(creditCardPanelLayout.createSequentialGroup()
+                    .addGap(93, 93, 93)
+                    .addComponent(creditCvv, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(87, Short.MAX_VALUE)))
+        );
+        creditCardPanelLayout.setVerticalGroup(
+            creditCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, creditCardPanelLayout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(creditCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ccNumberInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(creditCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(ccMonthInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(creditCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(ccYearInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel9)
+                .addGap(33, 33, 33)
+                .addComponent(onCreditCardSave)
+                .addContainerGap(29, Short.MAX_VALUE))
+            .addGroup(creditCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(creditCardPanelLayout.createSequentialGroup()
+                    .addGap(145, 145, 145)
+                    .addComponent(creditCvv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(81, Short.MAX_VALUE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,13 +377,28 @@ public class PatientHome extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(userName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 498, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 540, Short.MAX_VALUE)
+                        .addComponent(viewOrAddInsuranceButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(viewOrAddCreditCardButton)
+                        .addGap(18, 18, 18)
                         .addComponent(logoutButton)))
                 .addGap(16, 16, 16))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(payWithInsurance)
+                .addGap(18, 18, 18)
+                .addComponent(payWithCreditCardButton)
+                .addGap(56, 56, 56)
+                .addComponent(insurancePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(creditCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(medicinesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(391, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,12 +407,30 @@ public class PatientHome extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(userName)
                     .addComponent(jLabel2)
-                    .addComponent(logoutButton))
+                    .addComponent(logoutButton)
+                    .addComponent(viewOrAddCreditCardButton)
+                    .addComponent(viewOrAddInsuranceButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(167, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(payWithInsurance)
+                            .addComponent(payWithCreditCardButton))
+                        .addGap(149, 149, 149))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(creditCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(73, 73, 73))
+                            .addComponent(insurancePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 49, 49))))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(273, Short.MAX_VALUE)
+                    .addComponent(medicinesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(247, Short.MAX_VALUE)))
         );
 
         pack();
@@ -142,6 +441,115 @@ public class PatientHome extends javax.swing.JFrame {
         loginScreen.setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
+
+    private void viewOrAddCreditCardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrAddCreditCardButtonActionPerformed
+        // TODO add your handling code here:
+        creditCardPanel.setVisible(true);
+        insurancePanel.setVisible(false);
+        CreditCard cc = getPatient().getCreditCard();
+        if (cc != null) {
+            ccNumberInput.setText(cc.getCardNo());
+            ccMonthInput.setText(cc.getExpiryMonth());
+            ccYearInput.setText(cc.getExpiryYear());
+            creditCvv.setText(cc.getCvv());
+        } else {
+            ccNumberInput.setText("");
+            ccMonthInput.setText("");
+            ccYearInput.setText("");
+            creditCvv.setText("");
+        }
+    }//GEN-LAST:event_viewOrAddCreditCardButtonActionPerformed
+
+    private void viewOrAddInsuranceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrAddInsuranceButtonActionPerformed
+        // Check if current patient has insurance, if so set the input box text
+        // else set it as empty
+        // Add Save button
+        insurancePanel.setVisible(true);
+        creditCardPanel.setVisible(false);
+        Insurance ins = getPatient().getInsurance();
+        if (ins != null) {
+            insuranceNumberTextInput.setText(ins.getInsuranceNumber());
+            insuranceProviderTextInput.setText(ins.getProvider());
+        } else {
+        insuranceNumberTextInput.setText("");
+        insuranceProviderTextInput.setText("");
+        }
+        
+    }//GEN-LAST:event_viewOrAddInsuranceButtonActionPerformed
+
+    private void payWithInsuranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payWithInsuranceActionPerformed
+        // TODO add your handling code here:
+        markPrescriptionAsPaid("Insurance");
+    }//GEN-LAST:event_payWithInsuranceActionPerformed
+
+    private void markPrescriptionAsPaid(String paymentMethod) {
+        Prescription selectedPresc = getSelectedPrescription();
+        ArrayList<Prescription> allPrescs = getAllPrescriptions();
+        for(Prescription pr: allPrescs ) {
+            if(pr.getID().equals(selectedPresc.getID())) {
+                pr.setStatus(Prescription.Status.PAID);
+                pr.setPaymentMethod(paymentMethod);
+            }
+        }
+        setAllPrescriptions(allPrescs);
+        startUI();
+    }
+    
+    private void payWithCreditCardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payWithCreditCardButtonActionPerformed
+        // update the prescription selected
+        markPrescriptionAsPaid("Credit Card");
+    }//GEN-LAST:event_payWithCreditCardButtonActionPerformed
+
+    private void onInsuranceSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onInsuranceSaveActionPerformed
+        Patient p = getPatient();
+        Insurance ins = p.getInsurance();
+        ins.setInsuranceNumber(insuranceNumberTextInput.getText());
+        ins.setProvider(insuranceProviderTextInput.getText());
+        setPatient(p);
+        startUI();
+    }//GEN-LAST:event_onInsuranceSaveActionPerformed
+
+    private void insuranceNumberTextInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insuranceNumberTextInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_insuranceNumberTextInputActionPerformed
+
+    private void insuranceProviderTextInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insuranceProviderTextInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_insuranceProviderTextInputActionPerformed
+
+    private void onCreditCardSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onCreditCardSaveActionPerformed
+        
+        Patient p = getPatient();
+        CreditCard cc = p.getCreditCard();
+        if (cc == null ) {
+            cc = new CreditCard();
+        }
+        
+        cc.setCardNo(ccNumberInput.getText());
+        cc.setExpiryMonth(ccMonthInput.getText());
+        cc.setExpiryYear(ccYearInput.getText());
+        cc.setCvv(new String(creditCvv.getPassword()));
+        p.setCreditCard(cc);
+        setPatient(p);
+        startUI();
+        
+    }//GEN-LAST:event_onCreditCardSaveActionPerformed
+
+    private void ccNumberInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ccNumberInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ccNumberInputActionPerformed
+
+    private void ccYearInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ccYearInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ccYearInputActionPerformed
+
+    private void ccMonthInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ccMonthInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ccMonthInputActionPerformed
+
+    private void creditCvvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditCvvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_creditCvvActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,15 +590,28 @@ public class PatientHome extends javax.swing.JFrame {
         this.patient = p;
     }
     
+    public Patient getPatient() {
+        return this.patient;
+    }
+    
     public void startUI() {
         userName.setText(this.patient.getUsername());
+        medicinesPanel.setVisible(false);
+        insurancePanel.setVisible(false);
+        creditCardPanel.setVisible(false);
+        payWithCreditCardButton.setVisible(false);
+        payWithInsurance.setVisible(false);
 //        prescriptionsTable.setValueAt("hello", 0, 0);
         Data data = new Data();
-        ArrayList<Prescription> prescriptions = data.getPrescriptions();
+        ArrayList<Prescription> prescriptions = getAllPrescriptions();
+        if (prescriptions == null) {
+            prescriptions = data.getPrescriptions();
+            setAllPrescriptions(prescriptions);
+        }
         ArrayList<Prescription> patientPrescs = new ArrayList<>();
         
-        for(Prescription p: prescriptions) {
-            if(p.getPatient().getUsername().equals(this.patient.getUsername()) ) {
+        for (Prescription p : prescriptions) {
+            if (p.getPatient().getUsername().equals(this.patient.getUsername())) {
                 patientPrescs.add(p);
             }
         }
@@ -199,45 +620,84 @@ public class PatientHome extends javax.swing.JFrame {
             prescriptionsTable.setValueAt(prescription.getID(), i, 0);
             prescriptionsTable.setValueAt(prescription.getDoctor().getName(), i, 1);
             prescriptionsTable.setValueAt(prescription.getTotalPrice(), i, 2);
-            
+            prescriptionsTable.setValueAt(prescription.getStatusString(prescription.getStatus()), i, 3);
+            prescriptionsTable.setValueAt(prescription.getPaymentMethod(), i, 4);
         }
-        prescriptionsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+        prescriptionsTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
-                
-                System.out.println(prescriptionsTable.getValueAt(prescriptionsTable.getSelectedRow(), 0).toString());
-                // do some actions here, for example
-                // print first column value from selected row
-                String prescriptionID = prescriptionsTable.getValueAt(prescriptionsTable.getSelectedRow(), 0).toString();
-                Prescription foundPrescription = null;
-                for (Prescription prescrip : prescriptions) {
-                    if (prescrip.getID().equals(prescriptionID)) {
-                        foundPrescription = prescrip;
-                        break;
+                Object obj = prescriptionsTable.getValueAt(prescriptionsTable.getSelectedRow(), 0);
+                if (obj != null) {
+                    String prescriptionID = prescriptionsTable.getValueAt(prescriptionsTable.getSelectedRow(), 0).toString();
+                    Prescription foundPrescription = null;
+                    for (Prescription prescrip : getAllPrescriptions()) {
+                        if (prescrip.getID().equals(prescriptionID)) {
+                            foundPrescription = prescrip;
+                            setSelectedPrescription(prescrip);
+                            break;
+                        }
                     }
-                }
-                if (foundPrescription != null) {
-                    ArrayList<Medicine> medicines = foundPrescription.getMedicines();
-                    for (int i = 0; i < medicines.size(); i++) {
-                        Medicine med = medicines.get(i);
-                        medicinesTable.setValueAt(med.getID(), i, 0);
-                        medicinesTable.setValueAt(med.getName(), i, 1);
-                        medicinesTable.setValueAt(med.getPrice(), i, 2);
-
+                    medicinesPanel.setVisible(true);
+                    insurancePanel.setVisible(false);
+                    creditCardPanel.setVisible(false);
+                    if (foundPrescription != null) {
+                        ArrayList<Medicine> medicines = foundPrescription.getMedicines();
+                        for (int i = 0; i < medicines.size(); i++) {
+                            Medicine med = medicines.get(i);
+                            medicinesTable.setValueAt(med.getID(), i, 0);
+                            medicinesTable.setValueAt(med.getName(), i, 1);
+                            medicinesTable.setValueAt(med.getPrice(), i, 2);
+                            
+                        }
+                        if (foundPrescription.getStatus() == Prescription.Status.PAYMENT_PENDING) {
+                            
+                            Patient p = getPatient();
+                            if (p.getCreditCard() != null) {
+                                payWithCreditCardButton.setVisible(true);
+                            }
+                            if (p.getInsurance() != null) {
+                                payWithInsurance.setVisible(true);
+                            }
+                        }
+                        
                     }
+                } else {
+                    medicinesPanel.setVisible(false);
                 }
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField ccMonthInput;
+    private javax.swing.JTextField ccNumberInput;
+    private javax.swing.JTextField ccYearInput;
+    private javax.swing.JPanel creditCardPanel;
+    private javax.swing.JPasswordField creditCvv;
+    private javax.swing.JTextField insuranceNumberTextInput;
+    private javax.swing.JPanel insurancePanel;
+    private javax.swing.JTextField insuranceProviderTextInput;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton logoutButton;
+    private javax.swing.JPanel medicinesPanel;
     private javax.swing.JTable medicinesTable;
+    private javax.swing.JScrollPane medicinesTableScrollPane;
+    private javax.swing.JButton onCreditCardSave;
+    private javax.swing.JButton onInsuranceSave;
+    private javax.swing.JButton payWithCreditCardButton;
+    private javax.swing.JButton payWithInsurance;
     private javax.swing.JTable prescriptionsTable;
     private javax.swing.JLabel userName;
+    private javax.swing.JButton viewOrAddCreditCardButton;
+    private javax.swing.JButton viewOrAddInsuranceButton;
     // End of variables declaration//GEN-END:variables
 }

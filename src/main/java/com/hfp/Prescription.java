@@ -64,6 +64,17 @@ public class Prescription {
         this.medicines = medicines;
     }
     
+    private String paymentMethod;
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+    
+    
     /**
      * "Meds Not Available"
      * "Payment Pending"
