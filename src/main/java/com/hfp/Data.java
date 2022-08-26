@@ -89,7 +89,7 @@ public class Data {
         
         pr1.setDoctor(doctors.get(0));
         pr1.setPatient(patients.get(0));
-        pr1.setStatus(Prescription.Status.PAYMENT_PENDING);
+        pr1.setStatus(Prescription.Status.PAID);
         totalPrice = 0;
         ArrayList<Medicine> presMeds3 = new ArrayList<>();
         for (int i=0; i< allMedicines.size() - 1; i++) {

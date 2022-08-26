@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Prescription {
     public enum Status {
         MEDS_NOT_AVAIL,
+        NOTIFIED_MANAGER,
         PAYMENT_PENDING,
         PAID,
         DISPENSED
@@ -97,6 +98,9 @@ public class Prescription {
             case MEDS_NOT_AVAIL:
                 statusText = "Meds Not Available";
                 break;
+            case NOTIFIED_MANAGER:
+                statusText = "Notified Manager";
+                break;
             case PAYMENT_PENDING:
                 statusText = "Payment Pending";
                 break;
@@ -115,6 +119,9 @@ public class Prescription {
         Status returnStatus;
         switch (status) {
             case MEDS_NOT_AVAIL:
+                returnStatus = Status.NOTIFIED_MANAGER;
+                break;
+            case NOTIFIED_MANAGER:
                 returnStatus = Status.PAYMENT_PENDING;
                 break;
             case PAYMENT_PENDING:

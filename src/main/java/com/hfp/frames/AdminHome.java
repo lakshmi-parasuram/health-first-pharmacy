@@ -91,6 +91,7 @@ public class AdminHome extends javax.swing.JFrame {
         reminderLabel1 = new javax.swing.JLabel();
         salesQuantity = new javax.swing.JLabel();
         reminderLabel3 = new javax.swing.JLabel();
+        remindForPayments = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -352,7 +353,7 @@ public class AdminHome extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
-        remindForMedicinesButton.setText("Remind Patients");
+        remindForMedicinesButton.setText("Collection Remind");
         remindForMedicinesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 remindForMedicinesButtonActionPerformed(evt);
@@ -412,6 +413,13 @@ public class AdminHome extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
+        remindForPayments.setText("Remind for Payments");
+        remindForPayments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                remindForPaymentsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -422,10 +430,6 @@ public class AdminHome extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nameLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(reportButton)
-                .addGap(18, 18, 18)
-                .addComponent(remindForMedicinesButton)
-                .addGap(18, 18, 18)
                 .addComponent(newUserButton)
                 .addGap(18, 18, 18)
                 .addComponent(newProductButton)
@@ -440,8 +444,18 @@ public class AdminHome extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(newUserFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(437, 437, 437)
-                        .addComponent(reminderLabel)))
+                        .addGap(333, 333, 333)
+                        .addComponent(reportButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(reminderLabel))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(remindForPayments)
+                                .addGap(3, 3, 3)
+                                .addComponent(remindForMedicinesButton)
+                                .addGap(35, 35, 35)))))
                 .addContainerGap(128, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -465,7 +479,8 @@ public class AdminHome extends javax.swing.JFrame {
                     .addComponent(newProductButton)
                     .addComponent(newUserButton)
                     .addComponent(remindForMedicinesButton)
-                    .addComponent(reportButton))
+                    .addComponent(reportButton)
+                    .addComponent(remindForPayments))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                 .addComponent(reminderLabel)
                 .addGap(65, 65, 65)
@@ -531,7 +546,7 @@ public class AdminHome extends javax.swing.JFrame {
     private void newProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProductButtonActionPerformed
         reminderLabel.setVisible(false);
         newMedicineFrame.setVisible(true);
-newUserFrame.setVisible(false);
+        newUserFrame.setVisible(false);
         reportPanel.setVisible(false);
     }//GEN-LAST:event_newProductButtonActionPerformed
 
@@ -581,18 +596,26 @@ newUserFrame.setVisible(false);
     private void remindForMedicinesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remindForMedicinesButtonActionPerformed
         // TODO add your handling code here:
         reminderLabel.setVisible(true);
+        reminderLabel.setText("Reminder sent to Patients collect prescriptions");
         newUserFrame.setVisible(false);
          newMedicineFrame.setVisible(false);
         reportPanel.setVisible(false);
     }//GEN-LAST:event_remindForMedicinesButtonActionPerformed
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportButtonActionPerformed
-        // TODO add your handling code here:
         reminderLabel.setVisible(false);
         reportPanel.setVisible(true);
         newUserFrame.setVisible(false);
-         newMedicineFrame.setVisible(false);
+        newMedicineFrame.setVisible(false);
     }//GEN-LAST:event_reportButtonActionPerformed
+
+    private void remindForPaymentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remindForPaymentsActionPerformed
+        reminderLabel.setVisible(true);
+        reminderLabel.setText("Reminder sent to Patients to Pay for Medicines");
+        newUserFrame.setVisible(false);
+        newMedicineFrame.setVisible(false);
+        reportPanel.setVisible(false);
+    }//GEN-LAST:event_remindForPaymentsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -657,6 +680,7 @@ newUserFrame.setVisible(false);
     private javax.swing.JTextField newUserNameInput;
     private javax.swing.JTable prescriptionsTable;
     private javax.swing.JButton remindForMedicinesButton;
+    private javax.swing.JButton remindForPayments;
     private javax.swing.JLabel reminderLabel;
     private javax.swing.JLabel reminderLabel1;
     private javax.swing.JLabel reminderLabel2;

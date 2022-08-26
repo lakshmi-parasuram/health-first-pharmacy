@@ -143,6 +143,7 @@ public class Login extends javax.swing.JFrame {
             } else if (foundUser instanceof Pharmacist) {
                 PharmacistHome pharmacistHome = new PharmacistHome();
                 pharmacistHome.setPharmacist((Pharmacist)foundUser);
+                pharmacistHome.hideInitialElements();
                 pharmacistHome.startUI();
                 
                 pharmacistHome.setVisible(true);
