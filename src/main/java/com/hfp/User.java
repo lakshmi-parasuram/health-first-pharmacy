@@ -37,6 +37,15 @@ public class User {
         this.password = password;
         this.mobile = mobile;
     }
+    /**
+     * This method called from the LoginHome to handle the Login action
+     * - Retrieves all the users from the Data object
+     * - Tries to match the user with given username and password
+     * - Return user if found for success, else return null representing login failure
+     * @param username
+     * @param password
+     * @return 
+     */
     public User login(String username, String password) {
         Data data = new Data();
         ArrayList<User> users = data.getUsers();

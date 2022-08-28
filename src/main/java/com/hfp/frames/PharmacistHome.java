@@ -195,12 +195,23 @@ public class PharmacistHome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * This method is called when "Logout" button clicked 
+     * - Redirect user to Login Screen
+     * - Closes the current screen
+     * @param evt 
+     */
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         Login loginScreen = new Login();
         loginScreen.setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
 
+    /**
+     * this method is generic implementation of moving the Prescription from 
+     * one status to another status and update the prescription status
+     * @param evt 
+     */
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
         ArrayList<Prescription> prescs = getPrescriptions();
@@ -252,14 +263,26 @@ public class PharmacistHome extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * this method needs to be called to hide the initial elements to implement
+     * the dyanmic logic
+     */
     public void hideInitialElements() {
         notifiedManager.setVisible(false);
     }
+    /**
+     * this method is invoked during the screen initialization
+     * - get all prescriptions from Data object and set the current object 
+     * prescription details
+     * - Set the table with the current prescription table data
+     * - On Selecting an prescription then renders the individual medicine
+     * details of the selectd prescription
+     */
     public void startUI() {
         nameLabel.setText(this.pharmacist.getUsername());
         updateButton.setVisible(false);
         Data data = new Data();
-        ArrayList<Prescription> prescs = this.getPrescriptions();//; 
+        ArrayList<Prescription> prescs = this.getPrescriptions(); 
         if (prescs == null) {
             prescs = data.getPrescriptions();
             this.setPrescriptions(prescs);
@@ -307,7 +330,6 @@ public class PharmacistHome extends javax.swing.JFrame {
                             updateButton.setVisible(false);
                             break;
                         case PAYMENT_PENDING:
-//                            updateButton.setText("Notify Payment Pending");
                             updateButton.setVisible(false);
                             break;
                         case PAID:

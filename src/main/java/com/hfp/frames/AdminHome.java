@@ -522,6 +522,12 @@ public class AdminHome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     /**
+     * This method is called when "Logout" button clicked 
+     * - Redirect user to Login Screen
+     * - Closes the current screen
+     * @param evt 
+     */
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         Login loginScreen = new Login();
         loginScreen.setVisible(true);
@@ -532,6 +538,14 @@ public class AdminHome extends javax.swing.JFrame {
 
     }//GEN-LAST:event_newMedQuantityInputActionPerformed
 
+    /**
+     * This method is called when "Add" button is clicked on New Product
+     * - Get current inventory
+     * - Add new Product to the inventory
+     * - Update the inventory object
+     * - close the new product frame and refresh the Inventory table
+     * @param evt 
+     */
     private void newMedicineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedicineButtonActionPerformed
         reminderLabel.setVisible(false);
         newMedicineFrame.setVisible(false);
@@ -560,7 +574,13 @@ public class AdminHome extends javax.swing.JFrame {
     private void newMedIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedIdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_newMedIdActionPerformed
-
+    
+    /**
+     * This method is called when "New Product" is clicked
+     * - Makes the New product form visible with ability to enter new product details
+     * - hides all other frames that are not necessary
+     * @param evt 
+     */
     private void newProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newProductButtonActionPerformed
         reminderLabel.setVisible(false);
         newMedicineFrame.setVisible(true);
@@ -568,6 +588,12 @@ public class AdminHome extends javax.swing.JFrame {
         reportPanel.setVisible(false);
     }//GEN-LAST:event_newProductButtonActionPerformed
 
+    /**
+     * This method is called when "New User" is clicked
+     * - Makes the New User form visible with ability to enter new User details
+     * - hides all other frames that are not necessary
+     * @param evt 
+     */
     private void newUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserButtonActionPerformed
         reminderLabel.setVisible(false);
         newUserFrame.setVisible(true);
@@ -575,6 +601,15 @@ public class AdminHome extends javax.swing.JFrame {
         reportPanel.setVisible(false);
     }//GEN-LAST:event_newUserButtonActionPerformed
 
+   /**
+     * This method is called when "Add" button is clicked on New User
+     * - Get current users
+     * - Get username, role, mobile details from the form
+     * - Add new user to the existing users list
+     * - Update the users object
+     * - close the new user form and refresh the Users table
+     * @param evt 
+     */
     private void addNewUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewUserButtonActionPerformed
         newUserFrame.setVisible(false);
         reminderLabel.setVisible(false);
@@ -612,8 +647,14 @@ public class AdminHome extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rolesListActionPerformed
 
+    /**
+     * This method is called when "Remind for Payments" is clicked
+     * - Filter all the Prescriptions which are waiting for payment to be completed
+     * - For filtered prescriptions, get the patient details and send a reminder
+     * - Hider all other details that are not necessary
+     * @param evt 
+     */
     private void remindForMedicinesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remindForMedicinesButtonActionPerformed
-        // TODO add your handling code here:
         reminderLabel.setVisible(true);
         reminderLabel.setText("Reminder sent to Patients collect prescriptions");
         newUserFrame.setVisible(false);
@@ -621,6 +662,12 @@ public class AdminHome extends javax.swing.JFrame {
         reportPanel.setVisible(false);
     }//GEN-LAST:event_remindForMedicinesButtonActionPerformed
 
+    /**
+     * This method is called when "Report" is clicked
+     * - Makes the New product form visible with ability to enter new product details
+     * - hides all other frames that are not necessary
+     * @param evt 
+     */
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportButtonActionPerformed
         reminderLabel.setVisible(false);
         reportPanel.setVisible(true);
@@ -628,6 +675,13 @@ public class AdminHome extends javax.swing.JFrame {
         newMedicineFrame.setVisible(false);
     }//GEN-LAST:event_reportButtonActionPerformed
 
+    /**
+     * this method is called when "Remind For Payments" is clicked
+     * - Get all prescriptions and filter the prescriptions where payments are
+     * pending
+     * - For all those prescriptions, get patient info and send reminders
+     * @param evt 
+     */
     private void remindForPaymentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_remindForPaymentsActionPerformed
         reminderLabel.setVisible(true);
         reminderLabel.setText("Reminder sent to Patients to Pay for Medicines");
@@ -721,6 +775,12 @@ public class AdminHome extends javax.swing.JFrame {
         this.admin = admin;
     }
 
+    /**
+     * this method is invoked during the screen initialization
+     * get All users from the Data object and set data to Users table
+     * get Inventory from Data object and set inventory table
+     * get all prescriptions from Data object and set the prescriptions table data
+     */
     public void startUI() {
         newMedicineFrame.setVisible(false);
         reminderLabel.setVisible(false);

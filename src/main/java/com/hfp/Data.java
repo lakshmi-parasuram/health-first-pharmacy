@@ -102,6 +102,28 @@ public class Data {
         
         prescriptions.add(prescription);
         
+        // other prescription details
+        Prescription pr = new Prescription();
+        pr.setID("pr78");
+        
+        pr.setDoctor(doctors.get(0));
+        
+        pr.setPatient(patients.get(0));
+        // 
+        pr.setStatus(Prescription.Status.PAYMENT_PENDING);
+        double totalPrc = 0;
+        ArrayList<Medicine> prescMeds = new ArrayList<>();
+        for (int i=0; i< allMedicines.size() - 1; i++) {
+            Medicine med = allMedicines.get(i);
+            totalPrc += med.getPrice();
+            prescMeds.add(med);
+        }
+        pr.setMedicines(prescMeds);
+        
+        pr.setTotalPrice(totalPrc);
+        
+        prescriptions.add(pr);
+        
         // other prescription
         Prescription pr1 = new Prescription();
         pr1.setID("pr223");

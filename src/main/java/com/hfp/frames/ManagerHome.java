@@ -220,13 +220,23 @@ public class ManagerHome extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * This method is called when "Logout" button clicked 
+     * - Redirect user to Login Screen
+     * - Closes the current screen
+     * @param evt 
+     */
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         Login loginScreen = new Login();
         loginScreen.setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
 
+    /**
+     * this method is called when new medicine is ordered with the 
+     * provided medicine new quantity
+     * @param evt 
+     */
     private void newMedicineButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedicineButtonActionPerformed
         orderPlacedLabel.setVisible(true);
         newMedicineFrame.setVisible(false);
@@ -248,8 +258,7 @@ public class ManagerHome extends javax.swing.JFrame {
     }//GEN-LAST:event_newMedicineButtonActionPerformed
 
     private void newMedQuantityInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMedQuantityInputActionPerformed
-        
-        
+ 
     }//GEN-LAST:event_newMedQuantityInputActionPerformed
 
     /**
@@ -291,12 +300,21 @@ public class ManagerHome extends javax.swing.JFrame {
         this.manager = manager;
     }
     
+    /**
+     * this method is used to hide initial elements on the screen
+     */
     public void hideInitialElements() {
         orderPlacedLabel.setVisible(false);
         newMedicineFrame.setVisible(false);
     }
     
-        public void startUI() {
+    /**
+     * this method is generally invoked to present and refresh the data
+     * - get inventory from Data object and set to local object reference
+     * - on selected medicine information from the inventory 
+     *   - show and view medicines and respective quantity details
+     */
+    public void startUI() {
         nameLabel.setText(this.manager.getUsername());
         Data data = new Data();
         Inventory inventory = this.getInventory();

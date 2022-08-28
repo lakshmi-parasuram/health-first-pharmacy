@@ -4,6 +4,7 @@ import com.hfp.frames.AdminHome;
 import com.hfp.frames.ManagerHome;
 import com.hfp.frames.PatientHome;
 import com.hfp.frames.PharmacistHome;
+import com.hfp.frames.RegisterScreen;
 import java.awt.Color;
 
 /**
@@ -36,6 +37,7 @@ public class Login extends javax.swing.JFrame {
         login = new javax.swing.JButton();
         exit_button = new javax.swing.JButton();
         msg = new javax.swing.JLabel();
+        registerButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,41 +71,52 @@ public class Login extends javax.swing.JFrame {
 
         msg.setForeground(new java.awt.Color(204, 0, 0));
 
+        registerButton.setText("Register");
+        registerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(password_label)
+                    .addComponent(username_label))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(login_screen))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(password_label)
-                            .addComponent(username_label))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(login)
-                                .addGap(18, 18, 18)
-                                .addComponent(exit_button)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(user_name, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                            .addComponent(password))))
+                        .addComponent(login)
+                        .addGap(18, 18, 18)
+                        .addComponent(exit_button)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(user_name, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                    .addComponent(password))
                 .addGap(94, 94, 94))
             .addGroup(layout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addComponent(msg, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(msg, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addComponent(login_screen)
+                        .addGap(39, 39, 39)
+                        .addComponent(registerButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(login_screen)
-                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(login_screen)
+                    .addComponent(registerButton))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(username_label)
                     .addComponent(user_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -127,6 +140,15 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordActionPerformed
 
+    /**
+     * This method is called when "Login" button clicked 
+     * - Invoke login method on User Class with username and password
+     * - Based on the instance of User object after login, redirect user to
+     * PatientHome or PharmacistHome or ManagerHome or AdminHome and set their
+     * respective Main object
+     * - close this Login Screen
+     * @param evt 
+     */
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         String username = user_name.getText();
         String pass = new String(password.getPassword());
@@ -176,10 +198,25 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_loginActionPerformed
 
+    /**
+     * This method is called when "Exit" button is clicked closes the App
+     * @param evt 
+     */
     private void exit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exit_buttonActionPerformed
-        // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_exit_buttonActionPerformed
+
+    /**
+     * this method is called when "Register" button is clicked
+     * and navigates to new user registration screen and closes the current 
+     * login screen
+     * @param evt 
+     */
+    private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
+        RegisterScreen registerScreen = new RegisterScreen();
+        registerScreen.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_registerButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,6 +261,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel msg;
     private javax.swing.JPasswordField password;
     private javax.swing.JLabel password_label;
+    private javax.swing.JButton registerButton;
     private javax.swing.JTextField user_name;
     private javax.swing.JLabel username_label;
     // End of variables declaration//GEN-END:variables

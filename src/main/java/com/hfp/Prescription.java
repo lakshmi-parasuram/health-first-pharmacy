@@ -7,6 +7,9 @@ import java.util.ArrayList;
  * @author Lakshmi Parasuram <lakshmibhavani1712@gmail.com>
  */
 public class Prescription {
+    /**
+     * Enumeration to represent the Prescription Status
+     */
     public enum Status {
         MEDS_NOT_AVAIL,
         NOTIFIED_MANAGER,
@@ -92,6 +95,11 @@ public class Prescription {
         this.status = status;
     }
     
+    /**
+     * Return Text to display based on the Prescription Status Enumeration
+     * @param status
+     * @return 
+     */
     public String getStatusString(Status status) {
         String statusText = "";
         switch (status) {
@@ -115,6 +123,11 @@ public class Prescription {
         return statusText;
     }
     
+    /**
+     * Return the next status based on the current Prescription Status
+     * @param status
+     * @return 
+     */
     public Status getNextStatus(Status status) {
         Status returnStatus;
         switch (status) {

@@ -435,13 +435,25 @@ public class PatientHome extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * This method is called when "Logout" button clicked 
+     * - Redirect user to Login Screen
+     * - Closes the current screen
+     * @param evt 
+     */
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
         Login loginScreen = new Login();
         loginScreen.setVisible(true);
         dispose();
     }//GEN-LAST:event_logoutButtonActionPerformed
 
+    /**
+     * This method is called when "View/Edit Credit Cards" button is clicked
+     * - retrieves the credit card information of current logged in Patient
+     * - if information is available renders the information
+     * - else it asks the Patient to enter the Credit card details
+     * @param evt 
+     */
     private void viewOrAddCreditCardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrAddCreditCardButtonActionPerformed
         // TODO add your handling code here:
         creditCardPanel.setVisible(true);
@@ -460,6 +472,13 @@ public class PatientHome extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_viewOrAddCreditCardButtonActionPerformed
 
+     /**
+     * This method is called when "View/Add Insurance" button is clicked
+     * - retrieves the insurance information of current logged in Patient
+     * - if information is available renders the information
+     * - else it asks the Patient to enter the Insurance details
+     * @param evt 
+     */
     private void viewOrAddInsuranceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrAddInsuranceButtonActionPerformed
         // Check if current patient has insurance, if so set the input box text
         // else set it as empty
@@ -477,11 +496,20 @@ public class PatientHome extends javax.swing.JFrame {
         
     }//GEN-LAST:event_viewOrAddInsuranceButtonActionPerformed
 
+    /**
+     * This method is called when "Pay With Insurance" button is clicked
+     * this button only gets enabled when patient has added Insurance information
+     * @param evt 
+     */
     private void payWithInsuranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payWithInsuranceActionPerformed
-        // TODO add your handling code here:
         markPrescriptionAsPaid("Insurance");
     }//GEN-LAST:event_payWithInsuranceActionPerformed
 
+    /**
+     * this is a generic method used for enabling pay using "Insurance" 
+     * or "Credit Card" and mark the payment is completely paid.
+     * @param paymentMethod 
+     */
     private void markPrescriptionAsPaid(String paymentMethod) {
         Prescription selectedPresc = getSelectedPrescription();
         ArrayList<Prescription> allPrescs = getAllPrescriptions();
@@ -495,11 +523,23 @@ public class PatientHome extends javax.swing.JFrame {
         startUI();
     }
     
+    /**
+     * This method is called when "Pay With Credit Card" button is clicked
+     * this button only gets enabled when patient has added Credit card
+     * information
+     * @param evt 
+     */
     private void payWithCreditCardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payWithCreditCardButtonActionPerformed
         // update the prescription selected
         markPrescriptionAsPaid("Credit Card");
     }//GEN-LAST:event_payWithCreditCardButtonActionPerformed
 
+    /**
+     * this method is called when "Add" or "Save" button clicked in the
+     * Insurance information frame and adds or updates Insurance info
+     * which can be used for pending prescription payment
+     * @param evt 
+     */
     private void onInsuranceSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onInsuranceSaveActionPerformed
         Patient p = getPatient();
         Insurance ins = p.getInsurance();
@@ -517,6 +557,12 @@ public class PatientHome extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_insuranceProviderTextInputActionPerformed
 
+    /**
+     * this method is called when "Add" or "Save" button clicked in the
+     * Credit Card information frame and adds or updates Credit card info
+     * which can be used for pending prescription payment
+     * @param evt 
+     */
     private void onCreditCardSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onCreditCardSaveActionPerformed
         
         Patient p = getPatient();
@@ -594,6 +640,16 @@ public class PatientHome extends javax.swing.JFrame {
         return this.patient;
     }
     
+    /**
+     * this method is invoked during the screen initialization
+     * - get all prescriptions from Data object and set the current object 
+     * prescription details
+     * - Set the table with the current prescription table data
+     * - On Selecting an prescription then renders the individual medicine
+     * details of the selected prescription
+     * - based on the payment information provided credit card and insurance
+     * "Pay with Insurance", "Pay with Credit Card" buttons get enabled
+     */
     public void startUI() {
         userName.setText(this.patient.getUsername());
         medicinesPanel.setVisible(false);
@@ -601,7 +657,6 @@ public class PatientHome extends javax.swing.JFrame {
         creditCardPanel.setVisible(false);
         payWithCreditCardButton.setVisible(false);
         payWithInsurance.setVisible(false);
-//        prescriptionsTable.setValueAt("hello", 0, 0);
         Data data = new Data();
         ArrayList<Prescription> prescriptions = getAllPrescriptions();
         if (prescriptions == null) {
