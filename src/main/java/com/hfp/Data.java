@@ -8,6 +8,12 @@ import java.util.Random;
  * @author Lakshmi Parasuram <lakshmibhavani1712@gmail.com>
  */
 public class Data {
+    /**
+     * Get all Patients, Pharmacists, Managers and Admins
+     * and Return as Users
+     * 
+     * @return ArrayList<User>
+     */
     public ArrayList<User> getUsers() {
         ArrayList<User> users = new ArrayList<>();
         
@@ -34,6 +40,10 @@ public class Data {
         return users;
     }
     
+    /**
+     * Create bootstrapped Patients for the system and return them
+     * @return 
+     */
     public ArrayList<Patient> getPatients() {
         ArrayList<Patient> patients = new ArrayList<>();
         
@@ -55,6 +65,15 @@ public class Data {
         return patients;
     }
     
+    /**
+     * Create bootstrapped Prescriptions by retrieving
+     * - Doctors
+     * - Patients
+     * - All Medicines 
+     * Setup a price, quantity and return Prescriptions
+     * 
+     * @return ArrayList<Prescription>
+     */
     public ArrayList<Prescription> getPrescriptions() {
         ArrayList<Prescription> prescriptions = new ArrayList<>();
         
@@ -128,6 +147,10 @@ public class Data {
         return prescriptions;
     }
     
+    /**
+     * Create bootstrapped Medicines for the system usage
+     * @return ArrayList<Medicine>
+     */
     public ArrayList<Medicine> getMedicines() {
         ArrayList<Medicine> medicines = new ArrayList<>();
         
@@ -153,6 +176,11 @@ public class Data {
         return medicines;
     }
     
+    /**
+     * Create bootstrapped Doctors for the system usage
+     * 
+     * @return ArrayList<Doctor>
+     */
     public ArrayList<Doctor> getDoctors() {
         ArrayList<Doctor> doctors = new ArrayList<>();
         
@@ -167,6 +195,11 @@ public class Data {
         return doctors;
     }
     
+    /**
+     * Create bootstrapped Pharmacists for the system usage
+     * 
+     * @return ArrayList<Pharmacist>
+     */
     public ArrayList<Pharmacist> getPharmacists() {
         ArrayList<Pharmacist> pharmacists = new ArrayList<>();
         
@@ -177,7 +210,11 @@ public class Data {
         return pharmacists;
     }
     
-    
+    /**
+     * Create bootstrapped Managers for the system usage
+     * 
+     * @return ArrayList<Manager>
+     */
     public ArrayList<Manager> getManagers() {
         ArrayList<Manager> managers = new ArrayList<>();
         
@@ -187,6 +224,10 @@ public class Data {
         return managers;
     }
     
+    /**
+     * Create bootstrapped Admins for the the system usage
+     * @return ArrayList<Admin>
+     */
     public ArrayList<Admin> getAdmins() {
         ArrayList<Admin> admins = new ArrayList<>();
         
@@ -197,6 +238,11 @@ public class Data {
     }
     
     
+    /**
+     * Create bootstrapped Inventory by getting all Medicines
+     * Set Medicine With Quantity and return the Inventory object
+     * @return Inventory
+     */
     public Inventory getInventory() {
         ArrayList<Medicine> medicines = this.getMedicines();
         Inventory inventory = new Inventory();
