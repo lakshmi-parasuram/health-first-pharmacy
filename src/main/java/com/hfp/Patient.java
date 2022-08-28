@@ -24,7 +24,7 @@ public class Patient extends User {
         this.insurance = insurance;
     }
     
-    public Patient(String username, String password) {
-        super(username, password);
+    public Patient(String username, String password, String mobile) {
+        super(username, password, mobile);
     }
 }

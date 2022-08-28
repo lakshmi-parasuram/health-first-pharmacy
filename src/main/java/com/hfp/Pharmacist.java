@@ -8,7 +8,7 @@ public class Pharmacist extends User{
     public Pharmacist(){
         super();
     }
-    public Pharmacist(String username, String password) {
-        super(username, password);
+    public Pharmacist(String username, String password, String mobile) {
+        super(username, password, mobile);
     }
 }

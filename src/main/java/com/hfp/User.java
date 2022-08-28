@@ -9,6 +9,15 @@ import java.util.ArrayList;
 public class User {
     protected String username;
     protected String password;
+    protected String mobile;
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
     public String getUsername() {
         return username;
@@ -23,9 +32,10 @@ public class User {
     }
     
     public User(){}
-    public User(String username, String password) {
+    public User(String username, String password, String mobile) {
         this.username = username;
         this.password = password;
+        this.mobile = mobile;
     }
     public User login(String username, String password) {
         Data data = new Data();

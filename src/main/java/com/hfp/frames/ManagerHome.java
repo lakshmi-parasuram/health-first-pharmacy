@@ -300,7 +300,7 @@ public class ManagerHome extends javax.swing.JFrame {
         newMedicineFrame.setVisible(false);
     }
     
-    public void startUI() {
+        public void startUI() {
         nameLabel.setText(this.manager.getUsername());
         Data data = new Data();
         Inventory inventory = this.getInventory();

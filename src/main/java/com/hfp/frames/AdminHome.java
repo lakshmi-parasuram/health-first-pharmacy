@@ -83,6 +83,8 @@ public class AdminHome extends javax.swing.JFrame {
         addNewUserButton = new javax.swing.JButton();
         newUserNameInput = new javax.swing.JTextField();
         rolesList = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        newUserMobileInput = new javax.swing.JTextField();
         remindForMedicinesButton = new javax.swing.JButton();
         reminderLabel = new javax.swing.JLabel();
         reportButton = new javax.swing.JButton();
@@ -314,6 +316,14 @@ public class AdminHome extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("Mobile");
+
+        newUserMobileInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newUserMobileInputActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout newUserFrameLayout = new javax.swing.GroupLayout(newUserFrame.getContentPane());
         newUserFrame.getContentPane().setLayout(newUserFrameLayout);
         newUserFrameLayout.setHorizontalGroup(
@@ -321,17 +331,21 @@ public class AdminHome extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, newUserFrameLayout.createSequentialGroup()
                 .addContainerGap(59, Short.MAX_VALUE)
                 .addGroup(newUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
-                .addGroup(newUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
                     .addGroup(newUserFrameLayout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(addNewUserButton))
-                    .addGroup(newUserFrameLayout.createSequentialGroup()
-                        .addGap(60, 60, 60)
                         .addGroup(newUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rolesList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(newUserNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGroup(newUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(newUserFrameLayout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(addNewUserButton))
+                            .addGroup(newUserFrameLayout.createSequentialGroup()
+                                .addGap(60, 60, 60)
+                                .addGroup(newUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rolesList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(newUserNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(newUserMobileInput, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(33, 33, 33))
         );
         newUserFrameLayout.setVerticalGroup(
@@ -348,7 +362,11 @@ public class AdminHome extends javax.swing.JFrame {
                     .addGroup(newUserFrameLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(rolesList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(54, 54, 54)
+                .addGap(18, 18, 18)
+                .addGroup(newUserFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(newUserMobileInput, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addComponent(addNewUserButton)
                 .addGap(19, 19, 19))
         );
@@ -481,7 +499,7 @@ public class AdminHome extends javax.swing.JFrame {
                     .addComponent(remindForMedicinesButton)
                     .addComponent(reportButton)
                     .addComponent(remindForPayments))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addComponent(reminderLabel)
                 .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -565,19 +583,20 @@ public class AdminHome extends javax.swing.JFrame {
         User u;
         ArrayList<User> users = getUsers();
         String name = newUserNameInput.getText();
+        String mobile = newUserMobileInput.getText();
         switch (role) {
             case "Admin":
-                u = new Admin(name, "1234");
+                u = new Admin(name, "1234", mobile);
                 break;
             case "Manager":
-                u = new Manager(name, "1234");
+                u = new Manager(name, "1234", mobile);
                 break;
             case "Pharmacist":
-                u = new Pharmacist(name, "1234");
+                u = new Pharmacist(name, "1234", mobile);
                 break;
             case "Patient":
             default:
-                u = new Patient(name, "1234");
+                u = new Patient(name, "1234", mobile);
                 break;
 
         }
@@ -616,6 +635,10 @@ public class AdminHome extends javax.swing.JFrame {
         newMedicineFrame.setVisible(false);
         reportPanel.setVisible(false);
     }//GEN-LAST:event_remindForPaymentsActionPerformed
+
+    private void newUserMobileInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserMobileInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_newUserMobileInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -662,6 +685,7 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -677,6 +701,7 @@ public class AdminHome extends javax.swing.JFrame {
     private javax.swing.JButton newProductButton;
     private javax.swing.JButton newUserButton;
     private javax.swing.JInternalFrame newUserFrame;
+    private javax.swing.JTextField newUserMobileInput;
     private javax.swing.JTextField newUserNameInput;
     private javax.swing.JTable prescriptionsTable;
     private javax.swing.JButton remindForMedicinesButton;

@@ -37,13 +37,13 @@ public class Data {
     public ArrayList<Patient> getPatients() {
         ArrayList<Patient> patients = new ArrayList<>();
         
-        Patient patient1 = new Patient("patient1", "1234");
+        Patient patient1 = new Patient("patient1", "1234", "07543678909");
         Insurance ins = new Insurance();
         ins.setInsuranceNumber("NHS123");
         ins.setProvider("NHS");
         patient1.setInsurance(ins);
         patients.add(patient1);
-        Patient patient2 = new Patient("patient2", "1234");
+        Patient patient2 = new Patient("patient2", "1234", "076543536332");
         CreditCard cc = new CreditCard();
         cc.setCardNo("1234 5678 9012");
         cc.setCvv("xxx");
@@ -170,9 +170,9 @@ public class Data {
     public ArrayList<Pharmacist> getPharmacists() {
         ArrayList<Pharmacist> pharmacists = new ArrayList<>();
         
-        Pharmacist phr1 = new Pharmacist("pharmacist1", "1234");
+        Pharmacist phr1 = new Pharmacist("pharmacist1", "1234", "071234567");
         pharmacists.add(phr1);
-        Pharmacist phr2 = new Pharmacist("pharmacist2", "1234");
+        Pharmacist phr2 = new Pharmacist("pharmacist2", "1234", "0798765432");
         pharmacists.add(phr2);
         return pharmacists;
     }
@@ -181,7 +181,7 @@ public class Data {
     public ArrayList<Manager> getManagers() {
         ArrayList<Manager> managers = new ArrayList<>();
         
-        Manager manager = new Manager("manager1", "1234");
+        Manager manager = new Manager("manager1", "1234", "07896545676");
         managers.add(manager);
         
         return managers;
@@ -190,7 +190,7 @@ public class Data {
     public ArrayList<Admin> getAdmins() {
         ArrayList<Admin> admins = new ArrayList<>();
         
-        Admin admin = new Admin("admin1", "1234");
+        Admin admin = new Admin("admin1", "1234", "067678878787");
         admins.add(admin);
         
         return admins;
